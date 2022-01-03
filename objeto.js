@@ -1,10 +1,10 @@
 class Edificio {
-    constructor (sNombre,iId,iCp,aIdPistas)
+    constructor (sNombre,iId,iCp)
     {
       this.sNombre = sNombre;
       this.iId = iId; 
       this.iCp = iCp;
-      this.aIdPistas = aIdPistas;
+      this.aIdPistas = [];
     }
   }
 class Pista{
@@ -37,6 +37,9 @@ class Usuario {
         this.sEstado = "Pendiente";
         this.bEsSocio = false;
         this.aClases = [];
+    }
+    get sDNI(){
+        return this.sDNI;
     }
 }
 
