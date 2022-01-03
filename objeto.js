@@ -1,3 +1,9 @@
+class Gestion {
+    constructor() {
+        this.aEdificios = [];
+        this.aUsuarios = [];
+    }
+}
 class Edificio {
     constructor (sNombre,iId,iCp)
     {
@@ -37,6 +43,11 @@ class Usuario {
         this.sEstado = "Pendiente";
         this.bEsSocio = false;
         this.aClases = [];
+    }
+    altaUsuario(oUsuario){
+        if (!Gestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI)){
+            Gestion.aUsuarios.push(oUsuario);
+        }
     }
     get sDNI(){
         return this.sDNI;
