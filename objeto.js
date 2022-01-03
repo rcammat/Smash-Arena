@@ -47,6 +47,9 @@ class Usuario {
     altaUsuario(oUsuario){
         if (Gestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI).length == 0){
             Gestion.aUsuarios.push(oUsuario);
+            return true;
+        }else {
+            return false;
         }
     }
     get sDNI(){
