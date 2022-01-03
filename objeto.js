@@ -4,7 +4,7 @@ class Gestion {
         this.aUsuarios = [];
     }
     altaUsuario(oUsuario){
-        if (oGestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI).length == 0){
+        if (oGestion.aUsuarios.filter(oUsu => oUsu.DNI == oUsuario.DNI).length == 0){
             oGestion.aUsuarios.push(oUsuario);
             return true;
         }else {
@@ -52,7 +52,7 @@ class Usuario {
         this.bEsSocio = false;
         this.aClases = [];
     }
-    get sDNI(){
+    get DNI(){
         return this.sDNI;
     }
 }
