@@ -3,6 +3,14 @@ class Gestion {
         this.aEdificios = [];
         this.aUsuarios = [];
     }
+    altaUsuario(oUsuario){
+        if (oGestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI).length == 0){
+            oGestion.aUsuarios.push(oUsuario);
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
 class Edificio {
     constructor (sNombre,iId,iCp)
@@ -43,14 +51,6 @@ class Usuario {
         this.sEstado = "Pendiente";
         this.bEsSocio = false;
         this.aClases = [];
-    }
-    altaUsuario(oUsuario){
-        if (oGestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI).length == 0){
-            oGestion.aUsuarios.push(oUsuario);
-            return true;
-        }else {
-            return false;
-        }
     }
     get sDNI(){
         return this.sDNI;
