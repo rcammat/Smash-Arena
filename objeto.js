@@ -1,4 +1,3 @@
-
 class Edificio {
     constructor (sNombre,iId,iCp,aIdPistas)
     {
@@ -31,11 +30,12 @@ class Reserva{
     }
 }
 class Usuario {
-    constructor(sNombreAp,sDNI,sFoto,sEstado){
+    constructor(sNombreAp,sDNI,sFoto){
         this.sNombreAp = sNombreAp;
         this.sDNI = sDNI;
         this.sFoto = sFoto;
-        this.sEstado = sEstado;
+        this.sEstado = "Pendiente";
+        this.bEsSocio = false;
         this.aClases = [];
     }
 }
