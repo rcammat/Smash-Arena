@@ -21,6 +21,11 @@ class Gestion {
         aUsuario[0].Estado = sEstado;
         return oGestion.aUsuarios;
     }
+    borrarUsuario(sDNI){
+        let aUsuariosAGuardar = oGestion.aUsuarios.filter(oUsu => oUsu.DNI != sDNI);
+        oGestion.aUsuarios = aUsuariosAGuardar;
+        return oGestion.aUsuarios;
+    }
     altaReserva(oReserva)
     {
         oGestion.aEdificios[0].pistas[0].reservas.push(oReserva);
