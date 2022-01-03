@@ -45,7 +45,7 @@ class Usuario {
         this.aClases = [];
     }
     altaUsuario(oUsuario){
-        if (!Gestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI)){
+        if (Gestion.aUsuarios.filter(oUsu => oUsu.sDNI == oUsuario.sDNI).length == 0){
             Gestion.aUsuarios.push(oUsuario);
         }
     }
