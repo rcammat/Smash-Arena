@@ -3,6 +3,8 @@ class Gestion {
     constructor() {
         this.aEdificios = [];
         this.aUsuarios = [];
+        this.aMaterial=[];
+        this.aClases=[];
     }
     altaUsuario(oUsuario){
         if (oGestion.aUsuarios.filter(oUsu => oUsu.DNI == oUsuario.DNI).length == 0){
@@ -31,6 +33,25 @@ class Gestion {
         oGestion.aEdificios[0].pistas[0].reservas.push(oReserva);
         return oGestion.aEdificios[0].pistas[0].reservas;
     }
+    altaVentaMaterial(oMaterial){
+    if(oGestion.aMaterial.filter(oMat => oMat.ID == oMaterial.ID).length == 0){
+        oGestion.aMaterial.push(oMaterial);
+        return true;
+    }else {
+        return false;
+    }
+    }
+    altaClase(oClase,aUsuarios){
+        if(oGestion.aClases.filter(oCla => oCla.ID == oClase.ID).length == 0){
+            oGestion.aClases.push(oClase);
+            oGestion.aClases[oGestion.aClases.length-1].Usuarios=aUsuarios;
+            return true ;
+        }else {
+            return false;
+        }
+    }
+
+
 }
 class Edificio {
     constructor (sNombre,iId,iCp)
@@ -82,6 +103,15 @@ class Usuario {
         this.bEsSocio = false;
         this.aClases = [];
     }
+    buscarUsuario(sDNI){
+        oUsuario = oGestion.aUsuarios.filter(oUsu => oUsu.DNI==sDNI);
+        if(oUsuario.length == 0){
+            return null;
+        }else {
+            return oUsuario[0];
+        }
+ 
+    }
     get NombreAp(){
         return this.sNombreAp;
     }
@@ -119,6 +149,12 @@ class Clase {
         this.aUsuarios = [];
         this.iIdInstructor = iIdInstructor;
     }
+    get ID(){
+        return this.iIdClase;
+    }
+    set Usuarios(aUsuarios){
+        this.aUsuarios = aUsuarios;
+    }
 }
 
 class Instructor {
@@ -128,4 +164,25 @@ class Instructor {
         this.sFoto = sFoto;
         this.aClases = [];
     }
+}
+class Material {
+    constructor(dtFechaHora,sNombre,iID,fPrecio,iCantidad,sDescripcion,bConsumible) {
+        this.dtFechaHora = dtFechaHora;
+        this.sNombre = sNombre;
+        this.iID = iID;
+        this.fPrecio = fPrecio;
+        this.iCantidad = iCantidad;
+        this.sDescripcion = sDescripcion;
+        this.bConsumible = bConsumible;
+    }
+    set Nombre(sNombre) {
+        this.sNombre= sNombre;
+    }
+    get Consumible() {
+        return this.sConsumible;
+    }
+    get ID(){
+        return this.iID;
+    }
+
 }
