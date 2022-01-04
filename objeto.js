@@ -28,6 +28,15 @@ class Gestion {
         oGestion.aUsuarios = aUsuariosAGuardar;
         return oGestion.aUsuarios;
     }
+    buscarUsuario(sDNI){
+        let oUsuario = oGestion.aUsuarios.filter(oUsu => oUsu.DNI==sDNI);
+        if(oUsuario.length == 0){
+            return null;
+        }else {
+            return oUsuario[0];
+        }
+ 
+    }
     altaReserva(oReserva)
     {
         oGestion.aEdificios[0].pistas[0].reservas.push(oReserva);
@@ -45,10 +54,17 @@ class Gestion {
         if(oGestion.aClases.filter(oCla => oCla.ID == oClase.ID).length == 0){
             oGestion.aClases.push(oClase);
             oGestion.aClases[oGestion.aClases.length-1].Usuarios=aUsuarios;
-            return true ;
+            return oGestion.aClases;
         }else {
             return false;
         }
+    }
+    modificarClase(iID,dtInicio,dtFin){
+        let aClase = oGestion.aClases.filter(aCla => aCla.ID == iID);
+        aClase[0].Inicio = dtInicio;
+        aClase[0].Fin = dtFin;
+        aClase[0].Nombre = sNombre;
+        return oGestion.aClases
     }
 
 
@@ -103,15 +119,6 @@ class Usuario {
         this.bEsSocio = false;
         this.aClases = [];
     }
-    buscarUsuario(sDNI){
-        oUsuario = oGestion.aUsuarios.filter(oUsu => oUsu.DNI==sDNI);
-        if(oUsuario.length == 0){
-            return null;
-        }else {
-            return oUsuario[0];
-        }
- 
-    }
     get NombreAp(){
         return this.sNombreAp;
     }
@@ -137,7 +144,7 @@ class Usuario {
 }
 
 class Clase {
-    constructor(iIdClase,sNombre,sDescripcion,dtInicio,dtFin,iCapacidad,sTipoActividad,sOcupacion,iIdInstructor){
+    constructor(iIdClase,sNombre,sDescripcion,dtInicio,dtFin,iCapacidad,sTipoActividad,iOcupacion,iIdInstructor){
         this.iIdClase = iIdClase;
         this.sNombre = sNombre;
         this.sDescripcion = sDescripcion;
@@ -145,7 +152,7 @@ class Clase {
         this.dtFin = dtFin;
         this.iCapacidad = iCapacidad;
         this.sTipoActividad = sTipoActividad;
-        this.sOcupacion = sOcupacion;
+        this.iOcupacion = iOcupacion;
         this.aUsuarios = [];
         this.iIdInstructor = iIdInstructor;
     }
@@ -154,6 +161,12 @@ class Clase {
     }
     set Usuarios(aUsuarios){
         this.aUsuarios = aUsuarios;
+    }
+    set Inicio(dtInicio){
+        this.dtInicio = dtInicio;
+    }
+    set Fin(dtFin){
+        this.dtFin = dtFin;
     }
 }
 
