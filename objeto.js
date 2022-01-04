@@ -39,7 +39,18 @@ class Gestion {
     }
     altaReserva(oReserva)
     {
-        oGestion.aEdificios[0].pistas[0].reservas.push(oReserva);
+        let mesage="";
+        if(existeEdificio(oReserva.edificio))
+        {//Vemos si existe el edificio.
+        var edificio = obtenerEdificio(oReserva.edificio);
+        }
+        else 
+        mesage = "error";
+
+        let pista = obtenerPista(oReserva.pista,edificio);
+
+        pista.reservas.push(oReserva);
+
         return oGestion.aEdificios[0].pistas[0].reservas;
     }
     altaVentaMaterial(oMaterial){
@@ -80,6 +91,9 @@ class Edificio {
     get pistas(){
         return this.aIdPistas;
     }
+    get id(){
+        return this.iId;
+    }
   }
 class Pista{
     constructor (sNombre,iNumPista,iIdEdificio)
@@ -92,15 +106,22 @@ class Pista{
     get reservas(){
         return this.aReservas;
     }
+    get id(){
+        return this.iNumPista;
+    }
+    get edificio(){
+        return this.iIdEdificio;
+    }
 }
 
 class Reserva{
-    constructor (sNombreReserva,sDescripcion,dDiaReserva,iHoraInicio,iIdPista,iOcupacion)
+    constructor (sNombreReserva,sDescripcion,dDiaReserva,iHoraInicio,iIdEdificio,iIdPista,iOcupacion)
     {
       this.sNombreReserva = sNombreReserva;
       this.sDescripcion = sDescripcion; 
       this.dDiaReserva = dDiaReserva;
       this.iHoraInicio = iHoraInicio;
+      this.iIdEdificio = iIdEdificio;
       this.iIdPista = iIdPista;
       this.aIdsUsuarios = [];
       this.bOcupada = false;
@@ -108,6 +129,9 @@ class Reserva{
     }
     get pista(){
         return this.iIdPista;
+    }
+    get edificio(){
+        return this.iIdEdificio;
     }
 }
 class Usuario {
@@ -198,4 +222,36 @@ class Material {
         return this.iID;
     }
 
+}
+
+
+function existeEdificio(IdEdificio)
+{
+    for (let edificio of oGestion.aEdificios)
+    {
+        if(edificio.id == IdEdificio)
+            return true;    
+    }
+    return false;
+}
+
+
+function obtenerEdificio(IdEdificio)
+{
+    for (let edificio of oGestion.aEdificios)
+    {
+        if(edificio.id == IdEdificio)
+            return edificio;    
+    }
+}
+
+
+
+function obtenerPista(idPista,edificio)
+{
+    for (let pista of edificio.pistas)
+    {
+        if(pista.id == idPista)
+            return pista;    
+    }
 }
