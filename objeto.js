@@ -74,7 +74,6 @@ class Gestion {
         let aClase = oGestion.aClases.filter(aCla => aCla.ID == iID);
         aClase[0].Inicio = dtInicio;
         aClase[0].Fin = dtFin;
-        aClase[0].Nombre = sNombre;
         return oGestion.aClases
     }
 
@@ -202,15 +201,14 @@ class Instructor {
         this.aClases = [];
     }
 }
-class Material {
-    constructor(dtFechaHora,sNombre,iID,fPrecio,iCantidad,sDescripcion,bConsumible) {
+class VentaMaterial {
+    constructor(dtFechaHora,iIDVenta,iIDMaterial,fPrecio,iCantidad) {
         this.dtFechaHora = dtFechaHora;
-        this.sNombre = sNombre;
-        this.iID = iID;
+        this.iIDVenta = iIDVenta;
+        this.iIDMaterial = iIDMaterial;
         this.fPrecio = fPrecio;
         this.iCantidad = iCantidad;
-        this.sDescripcion = sDescripcion;
-        this.bConsumible = bConsumible;
+
     }
     set Nombre(sNombre) {
         this.sNombre= sNombre;
@@ -219,12 +217,26 @@ class Material {
         return this.sConsumible;
     }
     get ID(){
-        return this.iID;
+        return this.iIDMaterial;
     }
 
 }
+class Material {
+    constructor(iID,sNombre,iCantidad,sDescripcion,bConsumible){
+        this.iID = iID;
+        this.sNombre = sNombre;
+        this.iCantidad = iCantidad;
+        this.sDescripcion = sDescripcion;
+        this.bConsumible = bConsumible;
+    }
+}
 
-
+class Inventario {
+    constructor(iTotal){
+        this.iTotal= iTotal;
+        this.aMateriales=[];
+    }
+}
 function existeEdificio(IdEdificio)
 {
     for (let edificio of oGestion.aEdificios)
