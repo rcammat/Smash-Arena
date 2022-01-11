@@ -1,10 +1,28 @@
-var oGestion =  new Gestion();
+document.getElementById('altaUsuario').addEventListener("click",mostrarFormulario,false);
+document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
+frmAltaUsuario.addEventListener("click",altaUsuario,false);
+var oGestion = new Gestion();
+function altaUsuario() {
+    console.log("Hola");
+}
+function mostrarFormulario(){
+    ocultarTodosFormularios();
+    oEvento = window.event;
+    oFormulario = oEvento.srcElement;
+    switch(oFormulario.textContent){
+        case "Alta Usuario" :
+            frmAltaUsuario.style.display = "block";
+            break;
+        case "Alquilar Pista" :
+            frmAltaReserva.style.display = "block";
+            break;
 
-alert(oGestion.altaUsuario(new Usuario("Pepe","123456678e","prueba")));
-alert(oGestion.altaUsuario(new Usuario("Pepe","123456678e","prueba")));
-console.log(oGestion.altaUsuario(new Usuario("Carlos","123456789J","prueba")));
-console.log(oGestion.modificarUsuario("123456789J","Juan","prueba2","Pendiente"));
-oGestion.aEdificios.push(new Edificio("Nuevo Edificio",01,12345));// Creamos un edifico.
-oGestion.aEdificios[0].pistas.push(new Pista("Pista 1",01,01));//En ese edificio creamos esta pista
 
-console.log(oGestion.altaReserva(new Reserva("PepeReserva","Vamoh a jugar",new Date(01/02/2022),17,01,1)));//En esa pista creamos una reserva.
+    }
+}
+function ocultarTodosFormularios() {
+    let oFurmlarios = document.querySelectorAll("form");
+    for(let oFor of oFurmlarios){
+        oFor.style.display = "none";
+    }
+}
