@@ -89,21 +89,17 @@ class Pista{
 }
 
 class Reserva{
-    constructor (sNombreReserva,sDescripcion,dDiaReserva,iHoraInicio,iIdPista)
+    constructor (sNombreReserva,sDescripcion,dFechaReserva,dFechaFin ,iIdPista,sUsuarioReserva)
     {
       this.sNombreReserva = sNombreReserva;
       this.sDescripcion = sDescripcion; 
-      this.dDiaReserva = dDiaReserva;
-      this.iHoraInicio = iHoraInicio;
-      this.iHoraFin = iHoraInicio;
+      this.dFechaReserva = dFechaReserva;
+      this.dFechaFin = dFechaFin;
       this.iIdPista = iIdPista;
-      this.aUsuarios = [];
+      this.sUsuarioReserva = sUsuarioReserva;
     }
     get pista(){
         return this.iIdPista;
-    }
-    get edificio(){
-        return this.iIdEdificio;
     }
 }
 class Usuario {
