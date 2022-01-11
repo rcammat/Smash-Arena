@@ -83,9 +83,10 @@ class Pista{
     get id(){
         return this.iNumPista;
     }
-    get edificio(){
-        return this.iIdEdificio;
+    get nombre(){
+        return this.sNombre;
     }
+   
 }
 
 class Reserva{
