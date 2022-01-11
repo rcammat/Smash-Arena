@@ -26,3 +26,18 @@ function ocultarTodosFormularios() {
         oFor.style.display = "none";
     }
 }
+
+function hacerReserva(){
+    let nomReserva = frmAltaReserva.nombreReserva.value;
+    let descripcionReserva = frmAltaReserva.descripcionReserva.value;
+    let diaReserva = new Date(frmAltaReserva.diaReserva.value);
+    let StringInicioReserva = frmAltaReserva.horaInicioReserva.value;
+    let arrayHora = StringInicioReserva.split(":");
+    let fechaReserva = new Date(diaReserva.getFullYear(), diaReserva.getMonth() , diaReserva.getDay(), arrayHora[0] ,arrayHora[1] ,00,00);
+    let fechaFin = new Date (fechaReserva);
+    fechaFin.setHours(fechaReserva.getHours()+1); 
+    console.log(fechaReserva);
+    console.log(fechaFin);
+    
+
+}
