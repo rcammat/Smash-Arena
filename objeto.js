@@ -1,17 +1,16 @@
 "use strict";
 class Gestion {
     constructor() {
-        this.aEdificios = [];
         this.aUsuarios = [];
-        this.aMaterial=[];
         this.aClases=[];
+        this.aPistas= [];
     }
     altaUsuario(oUsuario){
         if (oGestion.aUsuarios.filter(oUsu => oUsu.DNI == oUsuario.DNI).length == 0){
             oGestion.aUsuarios.push(oUsuario);
-            return true;
+            return "Alta OK";
         }else {
-            return false;
+            return "Alta no OK";
         }
     }
     modificarUsuario(sDNI,sNombreApe,sFoto,sEstado){
@@ -53,14 +52,6 @@ class Gestion {
 
         return oGestion.aEdificios[0].pistas[0].reservas;
     }
-    altaVentaMaterial(oMaterial){
-    if(oGestion.aMaterial.filter(oMat => oMat.ID == oMaterial.ID).length == 0){
-        oGestion.aMaterial.push(oMaterial);
-        return true;
-    }else {
-        return false;
-    }
-    }
     altaClase(oClase,aUsuarios){
         if(oGestion.aClases.filter(oCla => oCla.ID == oClase.ID).length == 0){
             oGestion.aClases.push(oClase);
@@ -79,27 +70,11 @@ class Gestion {
 
 
 }
-class Edificio {
-    constructor (sNombre,iId,iCp)
-    {
-      this.sNombre = sNombre;
-      this.iId = iId; 
-      this.iCp = iCp;
-      this.aIdPistas = [];
-    }
-    get pistas(){
-        return this.aIdPistas;
-    }
-    get id(){
-        return this.iId;
-    }
-  }
 class Pista{
-    constructor (sNombre,iNumPista,iIdEdificio)
+    constructor (sNombre,iNumPista)
     {
       this.sNombre = sNombre;
       this.iNumPista = iNumPista; 
-      this.iIdEdificio = iIdEdificio;
       this.aReservas = [];
     }
     get reservas(){
@@ -114,17 +89,15 @@ class Pista{
 }
 
 class Reserva{
-    constructor (sNombreReserva,sDescripcion,dDiaReserva,iHoraInicio,iIdEdificio,iIdPista,iOcupacion)
+    constructor (sNombreReserva,sDescripcion,dDiaReserva,iHoraInicio,iIdPista)
     {
       this.sNombreReserva = sNombreReserva;
       this.sDescripcion = sDescripcion; 
       this.dDiaReserva = dDiaReserva;
       this.iHoraInicio = iHoraInicio;
-      this.iIdEdificio = iIdEdificio;
+      this.iHoraFin = iHoraInicio;
       this.iIdPista = iIdPista;
-      this.aIdsUsuarios = [];
-      this.bOcupada = false;
-      this.iOcupacion=iOcupacion;
+      this.aUsuarios = [];
     }
     get pista(){
         return this.iIdPista;
@@ -134,12 +107,12 @@ class Reserva{
     }
 }
 class Usuario {
-    constructor(sNombreAp,sDNI,sFoto){
+    constructor(sNombreAp,sDNI,iEdad,bSexo,bEsInstructor){
         this.sNombreAp = sNombreAp;
         this.sDNI = sDNI;
-        this.sFoto = sFoto;
-        this.sEstado = "Pendiente";
-        this.bEsSocio = false;
+        this.iEdad = iEdad;
+        this.bSexo = bSexo;
+        this.bEsInstructor = bEsInstructor;
         this.aClases = [];
     }
     get NombreAp(){
@@ -154,20 +127,11 @@ class Usuario {
     set DNI(sDNI){
         this.sDNI = sDNI;
     }
-    set Foto(sFoto){
-        this.sFoto = sFoto;
-    }
-    set Estado(sEstado){
-        this.sEstado = sEstado;
-    }
-    set EsSocio(bEsSocio){
-        this.bEsSocio = bEsSocio;
-    }
 
 }
 
 class Clase {
-    constructor(iIdClase,sNombre,sDescripcion,dtInicio,dtFin,iCapacidad,sTipoActividad,iOcupacion,iIdInstructor){
+    constructor(iIdClase,sNombre,sDescripcion,dtInicio,dtFin,iCapacidad,sTipoActividad,iIdInstructor){
         this.iIdClase = iIdClase;
         this.sNombre = sNombre;
         this.sDescripcion = sDescripcion;
@@ -175,7 +139,6 @@ class Clase {
         this.dtFin = dtFin;
         this.iCapacidad = iCapacidad;
         this.sTipoActividad = sTipoActividad;
-        this.iOcupacion = iOcupacion;
         this.aUsuarios = [];
         this.iIdInstructor = iIdInstructor;
     }
@@ -192,72 +155,6 @@ class Clase {
         this.dtFin = dtFin;
     }
 }
-
-class Instructor {
-    constructor(sNombre,sDNI,sFoto) {
-        this.sNombre = sNombre;
-        this.sDNI = sDNI;
-        this.sFoto = sFoto;
-        this.aClases = [];
-    }
-}
-class VentaMaterial {
-    constructor(dtFechaHora,iIDVenta,iIDMaterial,fPrecio,iCantidad) {
-        this.dtFechaHora = dtFechaHora;
-        this.iIDVenta = iIDVenta;
-        this.iIDMaterial = iIDMaterial;
-        this.fPrecio = fPrecio;
-        this.iCantidad = iCantidad;
-
-    }
-    set Nombre(sNombre) {
-        this.sNombre= sNombre;
-    }
-    get Consumible() {
-        return this.sConsumible;
-    }
-    get ID(){
-        return this.iIDMaterial;
-    }
-
-}
-class Material {
-    constructor(iID,sNombre,iCantidad,sDescripcion,bConsumible){
-        this.iID = iID;
-        this.sNombre = sNombre;
-        this.iCantidad = iCantidad;
-        this.sDescripcion = sDescripcion;
-        this.bConsumible = bConsumible;
-    }
-}
-
-class Inventario {
-    constructor(iTotal){
-        this.iTotal= iTotal;
-        this.aMateriales=[];
-    }
-}
-function existeEdificio(IdEdificio)
-{
-    for (let edificio of oGestion.aEdificios)
-    {
-        if(edificio.id == IdEdificio)
-            return true;    
-    }
-    return false;
-}
-
-
-function obtenerEdificio(IdEdificio)
-{
-    for (let edificio of oGestion.aEdificios)
-    {
-        if(edificio.id == IdEdificio)
-            return edificio;    
-    }
-}
-
-
 
 function obtenerPista(idPista,edificio)
 {
