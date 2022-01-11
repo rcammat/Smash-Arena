@@ -1,4 +1,5 @@
 document.getElementById('altaUsuario').addEventListener("click",mostrarFormulario,false);
+document.getElementById('modificarUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
 frmAltaUsuario.addEventListener("click",altaUsuario,false);
 var oGestion = new Gestion();
@@ -25,13 +26,15 @@ function mostrarFormulario(){
         case "Alquilar Pista" :
             frmAltaReserva.style.display = "block";
             break;
-
+        case "Modificar Usuario" :
+            frmModificarUsuario.style.display = "block";
+            break;
 
     }
 }
 function ocultarTodosFormularios() {
-    let oFurmlarios = document.querySelectorAll("form");
-    for(let oFor of oFurmlarios){
+    let oFormularios = document.querySelectorAll("form");
+    for(let oFor of oFormularios){
         oFor.style.display = "none";
     }
 }

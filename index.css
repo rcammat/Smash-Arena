@@ -1,0 +1,73 @@
+body {
+    background-color: #F4F4F4;
+}
+
+#titulo {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid black;
+    border-spacing: 1em;
+    text-align: center;
+    width: 20em;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.principal {
+    text-decoration: none;
+    color: rgb(22, 22, 22);
+}
+
+.principal:hover {
+    color: rgb(22, 22, 22);
+}
+
+.nav-link {
+    color: rgb(22, 22, 22);
+    text-decoration: none;
+}
+
+.nav-link-active:hover {
+    color: rgb(22, 22, 22);
+}
+
+/*.formularios {
+    display: none;
+}*/
+
+legend {
+    text-align: center;
+}
+
+#frmAltaUsuario {
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid rgb(201, 201, 201);
+    box-shadow: 5px 5px rgb(230, 230, 230);
+    padding: 1.5em;
+    background-color: #F2F2F2;
+  }
+
+#frmModificarUsuario {
+width: 100%;
+max-width: fit-content;
+margin: 0 auto;
+display: block;
+border: 1px solid rgb(201, 201, 201);
+box-shadow: 5px 5px rgb(230, 230, 230);
+padding: 1.5em;
+background-color: #F2F2F2;
+}
+
+#frmAltaReserva {
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid rgb(201, 201, 201);
+    box-shadow: 5px 5px rgb(230, 230, 230);
+    padding: 1.5em;
+    background-color: #F2F2F2;
+  }
