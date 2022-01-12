@@ -25,10 +25,7 @@
                         <a href="#" class="opcion nav-link" id="alquilarPista">Alquilar Pista</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="opcion nav-link" id="mostrarUsuarios">Listado de Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="opcion nav-link" id="cursosPadel">Cursos de Padel</a>
+                        <a href="#" class="opcion nav-link" id="crearClase">Crear clase de Padel</a>
                     </li>
                 </ul>
             </div>
@@ -48,12 +45,26 @@
                         <span class="input-group-text" id="basic-addon1">DNI</span>
                         <input type="text" class="form-control dniUsuario" placeholder="DNI" aria-label="DNI" aria-describedby="basic-addon1">
                     </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Selecciona foto del Usuario</label>
-                        <input class="form-control fotoUsuario" type="file" id="formFile">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Edad</span>
+                        <input type="number" class="form-control dniUsuario" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radioSexo" id="radioSexoHombre" checked>
+                        <label class="form-check-label" for="radioSexo">Hombre</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="radio" name="radioSexo" id="radioSexoMujer">
+                        <label class="form-check-label" for="radioSexo">Mujer</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" name="checkInstructor" id="checkInstructor">
+                        <label class="form-check-label" for="checkInstructor">Instructor</label>
                       </div>
-                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    <div class="d-grid gap-2 d-md-block">
+                        <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
+                        <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    </div>
                 </form>
             </div>
             <!--Formulario Modificar Usuario-->
@@ -61,22 +72,33 @@
                 <form name="frmModificarUsuario" id="frmModificarUsuario">
                     <legend><b>Modificar Usuario</b></legend>
                     <hr>
-                    <select class="form-select" aria-label="Selecciona un Usuario">
+                    <select class="form-select mb-3" aria-label="Selecciona un Usuario">
                         <option selected>Selecciona un usuario...</option>
                       </select>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control nombreUsuario" aria-label="Nombre y Apellidos" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control nombreUsuario" placeholder="Nombre y Apellidos" aria-label="Nombre y Apellidos" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">DNI</span>
-                        <input type="text" class="form-control dniUsuario" aria-label="DNI" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control dniUsuario" placeholder="DNI" aria-label="DNI" aria-describedby="basic-addon1">
                     </div>
-                    Foto del usuario:
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control fotoUsuario" id="inputGroupFile02">
-                        <label class="input-group-text" for="inputGroupFile02">Subir</label>
+                        <span class="input-group-text" id="basic-addon1">Edad</span>
+                        <input type="number" class="form-control dniUsuario" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1">
                     </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radioSexo" id="radioSexoHombre" checked>
+                        <label class="form-check-label" for="radioSexo">Hombre</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="radio" name="radioSexo" id="radioSexoMujer">
+                        <label class="form-check-label" for="radioSexo">Mujer</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" name="checkInstructor" id="checkInstructor">
+                        <label class="form-check-label" for="checkInstructor">Instructor</label>
+                      </div>
                     <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
                     <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
                 </form>
@@ -92,7 +114,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text descripcionReserva" id="basic-addon1">Descripción</span>
-                        <input type="text" class="form-control nombreReserva" placeholder="Descripción de la Reserva" aria-label="Descripción de la Reserva" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control descripcionReserva" placeholder="Descripción de la Reserva" aria-label="Descripción de la Reserva" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text diaReserva" id="basic-addon1">Día</span>
@@ -101,6 +123,50 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text horaReserva" id="basic-addon1">Hora</span>
                         <input type="time" class="form-control horaReserva" aria-label="Hora de la Reserva" aria-describedby="basic-addon1">
+                    </div>
+                    <select class="form-select mb-3" aria-label="Selecciona una Pista" id="comboPistas">
+                        <option selected>Selecciona una pista...</option>
+                    </select>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                </form>
+            </div>
+            <!--Formulario Alta Clases-->
+            <div class="divfrmAltaClases">
+                <form name="frmAltaClases" id="frmAltaClases">
+                    <legend><b>Crear una Clase</b></legend>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text idClase" id="basic-addon1">ID</span>
+                        <input type="number" class="form-control idClase" placeholder="ID de la Clase" aria-label="ID de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text nombreClase" id="basic-addon1">Nombre</span>
+                        <input type="text" class="form-control nombreClase" placeholder="Nombre de la Clase" aria-label="Nombre de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text descripcionClase" id="basic-addon1">Descripción</span>
+                        <input type="text" class="form-control descripcionClase" placeholder="Descripción de la Clase" aria-label="Descripción de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text diaInicioClase" id="basic-addon1">Día de Inicio</span>
+                        <input type="date" class="form-control diaInicioClase" aria-label="Día de inicio de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text diaFinClase" id="basic-addon1">Día de Fin</span>
+                        <input type="date" class="form-control diaFinClase" aria-label="Día de fin de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text capacidadClase" id="basic-addon1">Capacidad</span>
+                        <input type="number" class="form-control capacidadClase" placeholder="Capacidad de la Clase" aria-label="ID de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text tipoClase" id="basic-addon1">Tipo</span>
+                        <input type="text" class="form-control tipoClase" placeholder="Tipo de Clase" aria-label="Descripción de la Clase" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text idInstructorClase" id="basic-addon1">Instructor</span>
+                        <input type="number" class="form-control idInstructorClase" placeholder="ID del Instructor" aria-label="ID del Instructor" aria-describedby="basic-addon1">
                     </div>
                     <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
                     <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>

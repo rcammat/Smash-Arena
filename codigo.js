@@ -1,6 +1,7 @@
 document.getElementById('altaUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('modificarUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
+document.getElementById('crearClase').addEventListener("click",mostrarFormulario,false);
 frmAltaUsuario.addEventListener("click",altaUsuario,false);
 var oGestion = new Gestion();
 
@@ -29,7 +30,9 @@ function mostrarFormulario(){
         case "Modificar Usuario" :
             frmModificarUsuario.style.display = "block";
             break;
-
+        case "Crear clase de Padel" :
+            frmAltaClases.style.display = "block";
+            break;
     }
 }
 function ocultarTodosFormularios() {
@@ -68,19 +71,19 @@ function cargaPistas(){
 
     //Esto si sirve
     oCapa = document.getElementById("comboPistas");
-    oCapa.appendChild(document.createElement("SELECT"));
+    /*oCapa.appendChild(document.createElement("SELECT"));*/
 
     //console.log(oCapa);
 
-    let select = oCapa.lastChild;
+    /*let select = oCapa.lastChild;
     select.id="seleccionPistas";
-    select.name="seleccionPistas";
+    select.name="seleccionPistas";*/
 
 
     for (oPista of oGestion.aPistas){
-        select.appendChild(document.createElement("OPTION"));
-        select.lastChild.value = oPista.id;
-        select.lastChild.textContent = oPista.nombre;
+        oCapa.appendChild(document.createElement("OPTION"));
+        oCapa.lastChild.value = oPista.id;
+        oCapa.lastChild.textContent = oPista.nombre;
     }
 
 }
