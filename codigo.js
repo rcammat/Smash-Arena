@@ -110,6 +110,12 @@ function cargaPistas(){
 }
 function cargarComboUsuarios() {
     let oCapa = document.getElementById('comboUsuarios');
+    while(oCapa.hasChildNodes()){
+        oCapa.removeChild(oCapa.firstChild);
+    }
+    oCapa.appendChild(document.createElement("OPTION"))
+    oCapa.lastChild.value = "nulo";
+    oCapa.lastChild.textContent = "Selecciona un usuario...";
     for(let usuario of oGestion.aUsuarios){
         oCapa.appendChild(document.createElement("OPTION"));
         oCapa.lastChild.value = usuario.DNI;
