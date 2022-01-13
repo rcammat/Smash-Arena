@@ -2,23 +2,44 @@ document.getElementById('altaUsuario').addEventListener("click",mostrarFormulari
 document.getElementById('modificarUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
 document.getElementById('crearClase').addEventListener("click",mostrarFormulario,false);
-frmAltaUsuario.addEventListener("click",altaUsuario,false);
+document.getElementsByName('botonEnviar')[0].addEventListener("click",altaUsuario,false);
+document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosUsuario,false);
 var oGestion = new Gestion();
 
 cargaPistas();
-
+cargarComboUsuarios();
 
 function altaUsuario() {     
 let sNombreUsuario = document.querySelector(".nombreUsuario").value;     
 let sDNI = document.querySelector(".dniUsuario").value;     
 let iEdad = document.querySelector(".Edad").value;     
-let bSexo = document.querySelectorAll(".bSexo");      
+let aSexo = document.querySelectorAll(".radioSexo");
+let bSexo;
+let bInstructor;
+for (i in aSexo){
+    if(aSexo[i].checked){
+        aSexo=true;
+    }else {
+        bSexo=false;
+    }
+}
+if(document.getElementsByName('checkInstructor')[0].checked){
+    bInstructor=true;
+}else {
+    bInstructor=false;
+}
+if(sNombreUsuario == "" || sDNI == "" || iEdad == "" ){
+    alert("Debes rellenar todos los campos");
+}else {
+    alert(oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)));
+    cargarComboUsuarios();
+}
 }
 
 
-function mostrarFormulario(){
+function mostrarFormulario(oE){
     ocultarTodosFormularios();
-    oEvento = window.event;
+    oEvento = oE || window.event;
     oFormulario = oEvento.srcElement;
     switch(oFormulario.textContent){
         case "Alta Usuario" :
@@ -86,4 +107,24 @@ function cargaPistas(){
         oCapa.lastChild.textContent = oPista.nombre;
     }
 
+}
+function cargarComboUsuarios() {
+    let oCapa = document.getElementById('comboUsuarios');
+    for(let usuario of oGestion.aUsuarios){
+        oCapa.appendChild(document.createElement("OPTION"));
+        oCapa.lastChild.value = usuario.DNI;
+        oCapa.lastChild.textContent = usuario.NombreAp
+    }
+}
+function mostrarDatosUsuario() {
+    let sDNI = document.getElementById('comboUsuarios').value;
+    if( sDNI != "nulo"){
+        let usuario = oGestion.buscarUsuario(sDNI);
+        document.querySelector(".nombreUsuarioModificar").value = usuario.NombreAp;
+        document.querySelector(".dniUsuarioModificar").value = usuario.DNI;
+        document.querySelector(".edadModificar").value = usuario.Edad;
+        
+    }else {
+        alert("Seleccione un usuario");
+    }
 }

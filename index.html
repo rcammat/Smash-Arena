@@ -39,15 +39,15 @@
                     <hr>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control nombreUsuario" placeholder="Nombre y Apellidos" aria-label="Nombre y Apellidos" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control nombreUsuario" placeholder="Nombre y Apellidos" aria-label="Nombre y Apellidos" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">DNI</span>
-                        <input type="text" class="form-control dniUsuario" placeholder="DNI" aria-label="DNI" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control dniUsuario" placeholder="DNI" aria-label="DNI" aria-describedby="basic-addon1" required >
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Edad</span>
-                        <input type="number" class="form-control dniUsuario" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1">
+                        <input type="number" class="form-control Edad" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1" required >
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="radioSexo" id="radioSexoHombre" checked>
@@ -62,8 +62,8 @@
                         <label class="form-check-label" for="checkInstructor">Instructor</label>
                       </div>
                     <div class="d-grid gap-2 d-md-block">
-                        <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                        <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                        <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
+                        <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary">
                     </div>
                 </form>
             </div>
@@ -72,20 +72,20 @@
                 <form name="frmModificarUsuario" id="frmModificarUsuario">
                     <legend><b>Modificar Usuario</b></legend>
                     <hr>
-                    <select class="form-select mb-3" aria-label="Selecciona un Usuario">
-                        <option selected>Selecciona un usuario...</option>
-                      </select>
+                    <select class="form-select mb-3" aria-label="Selecciona un Usuario" id="comboUsuarios">
+                        <option selected value = "nulo">Selecciona un usuario...</option>
+                    </select>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control nombreUsuario" placeholder="Nombre y Apellidos" aria-label="Nombre y Apellidos" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control nombreUsuarioModificar" placeholder="Nombre y Apellidos" aria-label="Nombre y Apellidos" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">DNI</span>
-                        <input type="text" class="form-control dniUsuario" placeholder="DNI" aria-label="DNI" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control dniUsuarioModificar" placeholder="DNI" aria-label="DNI" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Edad</span>
-                        <input type="number" class="form-control dniUsuario" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1">
+                        <input type="number" class="form-control edadModificar" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1">
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="radioSexo" id="radioSexoHombre" checked>

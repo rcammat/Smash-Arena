@@ -124,6 +124,9 @@ class Usuario {
     set DNI(sDNI){
         this.sDNI = sDNI;
     }
+    get Edad() {
+        return this.iEdad;
+    }
 
 }
 
