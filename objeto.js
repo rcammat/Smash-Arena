@@ -39,19 +39,28 @@ class Gestion {
     }
     altaReserva(oReserva)
     {
-        let mesage="";
-        if(existeEdificio(oReserva.edificio))
-        {//Vemos si existe el edificio.
-        var edificio = obtenerEdificio(oReserva.edificio);
+        let message="";
+        let bYaEstaReservada=false;
+        let pista = obtenerPista(oReserva.pista);
+
+        //Comprobrar que el usuario este registrado .
+
+
+        for(let reserva of pista.reservas)
+        {
+            if(oReserva.dFechaReserva > reserva.dFechaReserva && oReserva.dFechaReserva < reserva.dFechaFin)
+                bYaEstaReservada=true;
         }
-        else 
-        mesage = "error";
 
-        let pista = obtenerPista(oReserva.pista,edificio);
+        if(bYaEstaReservada)
+        message = "Lo sentimos esa pista ya esta reservada a esa hora.";
 
-        pista.reservas.push(oReserva);
+        else{
+           pista.reservas.push(oReserva);
+           message="Se realizo la reserva de la pista de forma correcta.";
+        }
 
-        return oGestion.aEdificios[0].pistas[0].reservas;
+        return message;
     }
     altaClase(oClase){
         if(oGestion.aClases.filter(oCla => oCla.ID == oClase.ID).length == 0){
@@ -101,6 +110,12 @@ class Reserva{
     }
     get pista(){
         return this.iIdPista;
+    }
+    get fechaIni(){
+        return this.dFechaReserva;
+    }
+    get fechaFin(){
+        return this.dFechaFin;
     }
 }
 class Usuario {
@@ -171,9 +186,9 @@ class Clase {
     }
 }
 
-function obtenerPista(idPista,edificio)
+function obtenerPista(idPista)
 {
-    for (let pista of edificio.pistas)
+    for (let pista of oGestion.aPistas)
     {
         if(pista.id == idPista)
             return pista;    

@@ -5,6 +5,10 @@ document.getElementById('crearClase').addEventListener("click",mostrarFormulario
 document.getElementsByName('botonEnviar')[0].addEventListener("click",altaUsuario,false);
 document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosUsuario,false);
 document.getElementsByName('botonEnviar')[1].addEventListener("click",modificarUsuario,false);
+document.getElementsByName('botonEnviar')[3].addEventListener("click",altaClase,false);
+frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
+
+
 var oGestion = new Gestion();
 
 cargaPistas();
@@ -84,26 +88,39 @@ function mostrarFormulario(oE){
 }
 
 
-function hacerReserva(){
+function hacerReserva()
+{
+    let idReserva = frmAltaReserva.idReserva.value;
     let nomReserva = frmAltaReserva.nombreReserva.value;
     let descripcionReserva = frmAltaReserva.descripcionReserva.value;
+    //Para hacer la fecha de inicio y de fin con sus horas.
     let diaReserva = new Date(frmAltaReserva.diaReserva.value);
     let StringInicioReserva = frmAltaReserva.horaInicioReserva.value;
     let arrayHora = StringInicioReserva.split(":");
     let fechaReserva = new Date(diaReserva.getFullYear(), diaReserva.getMonth() , diaReserva.getDay(), arrayHora[0] ,arrayHora[1] ,00,00);
     let fechaFin = new Date (fechaReserva);
     fechaFin.setHours(fechaReserva.getHours()+1); 
-    //console.log(fechaReserva);
-    //console.log(fechaFin);
+   
 
-    let pistaSelecionada = frmAltaReserva.seleccionPistas.value;
+    let pistaSelecionada = frmAltaReserva.comboPistas.value;
 
-    console.log(pistaSelecionada);
+
+    oReserva = new Reserva(nomReserva,descripcionReserva,fechaReserva,fechaFin,pistaSelecionada,idReserva);
+    console.log(oReserva);
+
+    alert(oGestion.altaReserva(oReserva));
 
 }
 
-function altaClase(){
-    
+function altaClase(){     
+    let iIdClase = document.querySelector(".idClase").value;     
+    let sNombreClase = document.querySelector(".nombreClase").value;     
+    let sDescripcionClase = document.querySelector(".descripcionClase").value;     
+    let dtDiaInicio = new Date(document.querySelector('.diaInicioClase').value);     
+    let dtDiaFin = new Date(document.querySelector('.diaFinClase').value);     
+    let iCapacidad = document.querySelector('.capacidadClase').value;     
+    let sTipoClase = document.querySelector('.tipoClase').value;     
+    let idInstructor = document.querySelector('.idInstructorClase').value;  
 }
 function cargaPistas(){
     //Provisional 
