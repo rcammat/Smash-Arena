@@ -158,7 +158,7 @@ function mostrarDatosUsuario() {
         if(usuario.Sexo==true){
             document.getElementById('radioSexoHombre').checked = true;
         }else {
-            document.getElementById('radioSexoHombre').checked = false;
+            document.getElementById('radioSexoMujer').checked = true;
         }
         if(usuario.EsInstructor==true){
             document.getElementById("checkInstructorModificar").checked = true;
