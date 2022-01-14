@@ -53,13 +53,12 @@ class Gestion {
 
         return oGestion.aEdificios[0].pistas[0].reservas;
     }
-    altaClase(oClase,aUsuarios){
+    altaClase(oClase){
         if(oGestion.aClases.filter(oCla => oCla.ID == oClase.ID).length == 0){
             oGestion.aClases.push(oClase);
-            oGestion.aClases[oGestion.aClases.length-1].Usuarios=aUsuarios;
-            return oGestion.aClases;
+            return "Alta Clase Ok";
         }else {
-            return false;
+            return "Ya exise una clase con ese ID";
         }
     }
     modificarClase(iID,dtInicio,dtFin){

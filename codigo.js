@@ -82,12 +82,7 @@ function mostrarFormulario(oE){
             break;
     }
 }
-function ocultarTodosFormularios() {
-    let oFormularios = document.querySelectorAll("form");
-    for(let oFor of oFormularios){
-        oFor.style.display = "none";
-    }
-}
+
 
 function hacerReserva(){
     let nomReserva = frmAltaReserva.nombreReserva.value;
@@ -107,7 +102,9 @@ function hacerReserva(){
 
 }
 
-
+function altaClase(){
+    
+}
 function cargaPistas(){
     //Provisional 
     oGestion.aPistas.push(new Pista("Pista 1",1));
@@ -169,5 +166,11 @@ function mostrarDatosUsuario() {
     }else {
         alert("Seleccione un usuario");
         frmModificarUsuario.reset();
+    }
+}
+function ocultarTodosFormularios() {
+    let oFormularios = document.querySelectorAll("form");
+    for(let oFor of oFormularios){
+        oFor.style.display = "none";
     }
 }
