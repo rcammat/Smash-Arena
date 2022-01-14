@@ -4,6 +4,7 @@ document.getElementById('alquilarPista').addEventListener("click",mostrarFormula
 document.getElementById('crearClase').addEventListener("click",mostrarFormulario,false);
 document.getElementsByName('botonEnviar')[0].addEventListener("click",altaUsuario,false);
 document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosUsuario,false);
+document.getElementsByName('botonEnviar')[1].addEventListener("click",modificarUsuario,false);
 var oGestion = new Gestion();
 
 cargaPistas();
@@ -13,15 +14,12 @@ function altaUsuario() {
 let sNombreUsuario = document.querySelector(".nombreUsuario").value;     
 let sDNI = document.querySelector(".dniUsuario").value;     
 let iEdad = document.querySelector(".Edad").value;     
-let aSexo = document.querySelectorAll(".radioSexo");
 let bSexo;
 let bInstructor;
-for (i in aSexo){
-    if(aSexo[i].checked){
-        aSexo=true;
-    }else {
-        bSexo=false;
-    }
+if(document.getElementById('radioSexoHombreAltaUsuario').checked){
+    bSexo=true;
+}else {
+    bSexo=false;
 }
 if(document.getElementsByName('checkInstructor')[0].checked){
     bInstructor=true;
@@ -33,9 +31,37 @@ if(sNombreUsuario == "" || sDNI == "" || iEdad == "" ){
 }else {
     alert(oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)));
     cargarComboUsuarios();
+    frmAltaUsuario.reset();
+    ocultarTodosFormularios();
 }
 }
-
+function modificarUsuario() {
+    let sNombreUsuario = document.querySelector(".nombreUsuarioModificar").value;
+    let sDNIABuscar = document.getElementById("comboUsuarios");
+    sDNIABuscar = sDNIABuscar.children[document.getElementById("comboUsuarios").selectedIndex].value;     
+    let sDNIAGuardar = document.querySelector(".dniUsuarioModificar").value;     
+    let iEdad = document.querySelector(".edadModificar").value;
+    let bSexo;
+    let bInstructor;
+    if(document.getElementById('radioSexoHombre').checked){
+        bSexo=true;
+    }else {
+        bSexo=false;
+    }
+    if(document.getElementById('checkInstructorModificar').checked){
+        bInstructor = true;
+    } else {
+        bInstructor = false;
+    }
+    if(sNombreUsuario == "" || iEdad == "" ){
+        alert("Debes rellenar todos los campos");
+    }else {
+        alert(oGestion.modificarUsuario(sDNIABuscar,sDNIAGuardar,sNombreUsuario,iEdad,bSexo,bInstructor));
+        cargarComboUsuarios();
+        frmModificarUsuario.reset();
+        ocultarTodosFormularios();
+    }
+}
 
 function mostrarFormulario(oE){
     ocultarTodosFormularios();
@@ -72,7 +98,7 @@ function hacerReserva(){
     let fechaReserva = new Date(diaReserva.getFullYear(), diaReserva.getMonth() , diaReserva.getDay(), arrayHora[0] ,arrayHora[1] ,00,00);
     let fechaFin = new Date (fechaReserva);
     fechaFin.setHours(fechaReserva.getHours()+1); 
-   // console.log(fechaReserva);
+    //console.log(fechaReserva);
     //console.log(fechaFin);
 
     let pistaSelecionada = frmAltaReserva.seleccionPistas.value;
@@ -129,8 +155,19 @@ function mostrarDatosUsuario() {
         document.querySelector(".nombreUsuarioModificar").value = usuario.NombreAp;
         document.querySelector(".dniUsuarioModificar").value = usuario.DNI;
         document.querySelector(".edadModificar").value = usuario.Edad;
+        if(usuario.Sexo==true){
+            document.getElementById('radioSexoHombre').checked = true;
+        }else {
+            document.getElementById('radioSexoHombre').checked = false;
+        }
+        if(usuario.EsInstructor==true){
+            document.getElementById("checkInstructorModificar").checked = true;
+        }else {
+            document.getElementById("checkInstructorModificar").checked = false;
+        }
         
     }else {
         alert("Seleccione un usuario");
+        frmModificarUsuario.reset();
     }
 }

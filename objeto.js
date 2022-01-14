@@ -13,14 +13,15 @@ class Gestion {
             return "Alta no OK";
         }
     }
-    modificarUsuario(sDNI,sNombreApe,sFoto,sEstado){
+    modificarUsuario(sDNIABuscar,sDNIAGuardar,sNombreApe,iEdad,bSexo,bEsInstructor){
 
-        let aUsuario = oGestion.aUsuarios.filter(oUsu => oUsu.DNI == sDNI);
-        aUsuario[0].DNI = sDNI;
+        let aUsuario = oGestion.aUsuarios.filter(oUsu => oUsu.DNI == sDNIABuscar);
+        aUsuario[0].DNI = sDNIAGuardar;
         aUsuario[0].NombreAp = sNombreApe;
-        aUsuario[0].Foto = sFoto;
-        aUsuario[0].Estado = sEstado;
-        return oGestion.aUsuarios;
+        aUsuario[0].Edad = iEdad;
+        aUsuario[0].Sexo = bSexo;
+        aUsuario[0].EsInstructor = bEsInstructor;
+        return "Modificado Ok";
     }
     borrarUsuario(sDNI){
         let aUsuariosAGuardar = oGestion.aUsuarios.filter(oUsu => oUsu.DNI != sDNI);
@@ -108,7 +109,7 @@ class Usuario {
         this.sNombreAp = sNombreAp;
         this.sDNI = sDNI;
         this.iEdad = iEdad;
-        this.bSexo = bSexo;
+        this.bSexo = bSexo;//true hombre, false mujer
         this.bEsInstructor = bEsInstructor;
         this.aClases = [];
     }
@@ -126,6 +127,21 @@ class Usuario {
     }
     get Edad() {
         return this.iEdad;
+    }
+    set Edad(iEdad){
+        this.iEdad = iEdad;
+    }
+    get EsInstructor(){
+        return this.bEsInstructor
+    }
+    set EsInstructor(bEsInstructor){
+        this.bEsInstructor = bEsInstructor;
+    }
+    get Sexo(){
+        return this.bSexo;
+    }
+    set Sexo(bSexo){
+        this.bSexo = bSexo    
     }
 
 }
