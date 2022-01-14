@@ -109,22 +109,26 @@
                     <legend><b>Realizar Reserva</b></legend>
                     <hr>
                     <div class="input-group mb-3">
+                        <span class="input-group-text dniReserva" id="basic-addon1">DNI</span>
+                        <input type="text" class="form-control dniReserva"  name="idReserva" placeholder="DNI del Usuario" aria-label="DNI de la reserva" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text nombreReserva" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control nombreReserva" placeholder="Nombre de la Reserva" aria-label="Nombre de la Reserva" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control nombreReserva"  name="nombreReserva" placeholder="Nombre de la Reserva" aria-label="Nombre de la Reserva" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text descripcionReserva" id="basic-addon1">Descripción</span>
-                        <input type="text" class="form-control descripcionReserva" placeholder="Descripción de la Reserva" aria-label="Descripción de la Reserva" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control descripcionReserva"  name="descripcionReserva" placeholder="Descripción de la Reserva" aria-label="Descripción de la Reserva" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text diaReserva" id="basic-addon1">Día</span>
-                        <input type="date" class="form-control diaReserva" aria-label="Día de la Reserva" aria-describedby="basic-addon1">
+                        <input type="date" class="form-control diaReserva"  name="diaReserva" aria-label="Día de la Reserva" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text horaReserva" id="basic-addon1">Hora</span>
-                        <input type="time" class="form-control horaReserva" aria-label="Hora de la Reserva" aria-describedby="basic-addon1">
+                        <input type="time" class="form-control horaReserva"  name="horaInicioReserva" aria-label="Hora de la Reserva" aria-describedby="basic-addon1">
                     </div>
-                    <select class="form-select mb-3" aria-label="Selecciona una Pista" id="comboPistas">
+                    <select class="form-select mb-3" aria-label="Selecciona una Pista" name="comboPistas" id="comboPistas">
                         <option selected>Selecciona una pista...</option>
                     </select>
                     <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
