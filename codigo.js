@@ -139,7 +139,9 @@ function altaClase(){
     let dtDiaFin = new Date(document.querySelector('.diaFinClase').value);     
     let iCapacidad = document.querySelector('.capacidadClase').value;     
     let sTipoClase = document.querySelector('.tipoClase').value;     
-    let idInstructor = document.querySelector('.idInstructorClase').value;  
+    let idInstructor = document.querySelector('.idInstructorClase').value;
+    
+    oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor));
 }
 function cargaPistas(){
     //Provisional 
