@@ -23,11 +23,6 @@ class Gestion {
         aUsuario[0].EsInstructor = bEsInstructor;
         return "Modificado Ok";
     }
-    borrarUsuario(sDNI){
-        let aUsuariosAGuardar = oGestion.aUsuarios.filter(oUsu => oUsu.DNI != sDNI);
-        oGestion.aUsuarios = aUsuariosAGuardar;
-        return oGestion.aUsuarios;
-    }
     buscarUsuario(sDNI){
         let oUsuario = oGestion.aUsuarios.filter(oUsu => oUsu.DNI==sDNI);
         if(oUsuario.length == 0){
