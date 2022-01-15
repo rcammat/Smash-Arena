@@ -1,63 +1,69 @@
-<smashArena>
+<gestion>
 
-    <usuario1>
+    <usuario>
         <nombre>Joaquín</nombre>
         <dni>39018269F</dni>
         <edad>40</edad>
         <sexo>Masculino</sexo>
         <instructor>No</instructor>
-        <pista>
-            <nombre>Joaquín</nombre>
-            <numeroPista>1</numeroPista>
+    </usuario>
 
-            <reserva>
-                <nombre>Joaquín</nombre>
-                <descripcion>Reservar pista</descripcion>
-                <fechaReserva>13:00</fechaReserva>
-                <fechaFin>14:30</fechaFin>
-                <idPista>1</idPista>
-            </reserva>
-        </pista>
-    </usuario1>
-
-    <usuario2>
+    <usuario>
         <nombre>Lucas</nombre>
         <dni>59018269G</dni>
         <edad>20</edad>
         <sexo>Masculino</sexo>
         <instructor>No</instructor>
-        <pista>
-            <nombre>Lucas</nombre>
-            <numeroPista>2</numeroPista>
+    </usuario>
 
-            <reserva>
-                <nombre>Lucas</nombre>
-                <descripcion>Reservar pista</descripcion>
-                <fechaReserva>17:00</fechaReserva>
-                <fechaFin>18:30</fechaFin>
-                <idPista>2</idPista>
-            </reserva>
-        </pista>
-    </usuario2>
+    <pista>
+        <nombre>Pista 1</nombre>
+        <numero>1</numero>
+    </pista>
 
-    <usuario3>
-        <nombre>María</nombre>
-        <dni>19018269J</dni>
-        <edad>30</edad>
-        <sexo>Femenino</sexo>
-        <instructor>Si</instructor>
-        <pista>
-            <nombre>María</nombre>
-            <numeroPista>3</numeroPista>
+    <pista>
+        <nombre>Pista 2</nombre>
+        <numero>2</numero>
+    </pista>
 
-            <reserva>
-                <nombre>María</nombre>
-                <descripcion>Reservar pista</descripcion>
-                <fechaReserva>21:00</fechaReserva>
-                <fechaFin>23:30</fechaFin>
-                <idPista>3</idPista>
-            </reserva>
-        </pista>
-    </usuario3>
+    <reserva>
+        <nombre>Reserva 1</nombre>
+        <descripcion>Reservar la pista 1</descripcion>
+        <fechaReserva>17:00</fechaReserva>
+        <fechaFin>18:30</fechaFin>
+        <idPista>1</idPista>
+        <usuarioReserva>Joaquín</usuarioReserva>
+    </reserva>
 
-</smashArena>
+    <reserva>
+        <nombre>Reserva 2</nombre>
+        <descripcion>Reservar la pista 2</descripcion>
+        <fechaReserva>21:00</fechaReserva>
+        <fechaFin>23:30</fechaFin>
+        <idPista>2</idPista>
+        <usuarioReserva>Lucas</usuarioReserva>
+    </reserva>
+
+    <clase>
+        <iIdClase>1</iIdClase>
+        <sNombre>Joaquín</sNombre>
+        <sDescripcion>Clase de padel</sDescripcion>
+        <dtInicio>17:00</dtInicio>
+        <dtFin>18:30</dtFin>
+        <iCapacidad>10</iCapacidad>
+        <sTipoActividad>Padel</sTipoActividad>
+        <siIdInstructor>3</siIdInstructor>
+    </clase>
+
+     <clase>
+        <iIdClase>2</iIdClase>
+        <sNombre>Lucas</sNombre>
+        <sDescripcion>Clase de padel</sDescripcion>
+        <dtInicio>21:00</dtInicio>
+        <dtFin>23:30</dtFin>
+        <iCapacidad>5</iCapacidad>
+        <sTipoActividad>Padel niños</sTipoActividad>
+        <siIdInstructor>2</siIdInstructor>
+    </clase>
+
+</gestion>
