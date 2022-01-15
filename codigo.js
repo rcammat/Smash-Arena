@@ -10,7 +10,26 @@ frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 
 
 var oGestion = new Gestion();
-
+var oXML = loadXMLDoc("datosdeprueba.xml");
+var oUsuarios = oXML.getElementsByTagName("usuario");
+for(let oUsu of oUsuarios){
+    let sNombreUsuario = oUsu.getElementsByTagName("nombre")[0].textContent;
+    let sDNI = oUsu.getElementsByTagName("DNI")[0].textContent;
+    let iEdad = oUsu.getElementsByTagName("edad")[0].textContent;
+    let bSexo = oUsu.getElementsByTagName("sexo")[0].textContent;
+    let bInstructor = oUsu.getElementsByTagName("instructor")[0].textContent;
+    if(bSexo=="Hombre"){
+        bSexo=true;
+    }else {
+        bSexo=false
+    }
+    if(bInstructor=="Si"){
+        bInstructor=true
+    }else {
+        bInstructor=false;
+    }
+    oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)); 
+}
 cargaPistas();
 cargarComboUsuarios();
 
@@ -191,3 +210,20 @@ function ocultarTodosFormularios() {
         oFor.style.display = "none";
     }
 }
+
+function loadXMLDoc(filename)
+{
+	if (window.XMLHttpRequest)
+	  {
+	  xhttp=new XMLHttpRequest();
+	  }
+	else // code for IE5 and IE6
+	  {
+	  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xhttp.open("GET",filename,false);
+	
+	xhttp.send();
+	
+	return xhttp.responseXML;
+} 

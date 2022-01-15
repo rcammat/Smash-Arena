@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gestion>
+	<usuario>
+		<nombre>Juan</nombre>
+		<DNI>123</DNI>
+		<edad>55</edad>
+		<sexo>Hombre</sexo>
+		<instructor>Si</instructor>
+	</usuario>
+
+	<usuario>
+		<nombre>Maria</nombre>
+		<DNI>456</DNI>
+		<edad>28</edad>
+		<sexo>Mujer</sexo>
+		<instructor>No</instructor>
+	</usuario>
+</gestion>
