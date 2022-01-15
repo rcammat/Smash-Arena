@@ -1,0 +1,63 @@
+<smashArena>
+
+    <usuario1>
+        <nombre>Joaquín</nombre>
+        <dni>39018269F</dni>
+        <edad>40</edad>
+        <sexo>Masculino</sexo>
+        <instructor>No</instructor>
+        <pista>
+            <nombre>Joaquín</nombre>
+            <numeroPista>1</numeroPista>
+
+            <reserva>
+                <nombre>Joaquín</nombre>
+                <descripcion>Reservar pista</descripcion>
+                <fechaReserva>13:00</fechaReserva>
+                <fechaFin>14:30</fechaFin>
+                <idPista>1</idPista>
+            </reserva>
+        </pista>
+    </usuario1>
+
+    <usuario2>
+        <nombre>Lucas</nombre>
+        <dni>59018269G</dni>
+        <edad>20</edad>
+        <sexo>Masculino</sexo>
+        <instructor>No</instructor>
+        <pista>
+            <nombre>Lucas</nombre>
+            <numeroPista>2</numeroPista>
+
+            <reserva>
+                <nombre>Lucas</nombre>
+                <descripcion>Reservar pista</descripcion>
+                <fechaReserva>17:00</fechaReserva>
+                <fechaFin>18:30</fechaFin>
+                <idPista>2</idPista>
+            </reserva>
+        </pista>
+    </usuario2>
+
+    <usuario3>
+        <nombre>María</nombre>
+        <dni>19018269J</dni>
+        <edad>30</edad>
+        <sexo>Femenino</sexo>
+        <instructor>Si</instructor>
+        <pista>
+            <nombre>María</nombre>
+            <numeroPista>3</numeroPista>
+
+            <reserva>
+                <nombre>María</nombre>
+                <descripcion>Reservar pista</descripcion>
+                <fechaReserva>21:00</fechaReserva>
+                <fechaFin>23:30</fechaFin>
+                <idPista>3</idPista>
+            </reserva>
+        </pista>
+    </usuario3>
+
+</smashArena>
