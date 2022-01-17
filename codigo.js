@@ -3,10 +3,10 @@ document.getElementById('altaUsuario').addEventListener("click",mostrarFormulari
 document.getElementById('modificarUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
 document.getElementById('crearClase').addEventListener("click",mostrarFormulario,false);
-document.getElementsByName('botonEnviar')[0].addEventListener("click",altaUsuario,false);
+frmAltaUsuario.botonEnviar.addEventListener("click",altaUsuario,false);
 document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosUsuario,false);
-document.getElementsByName('botonEnviar')[1].addEventListener("click",modificarUsuario,false);
-document.getElementsByName('botonEnviar')[3].addEventListener("click",altaClase,false);
+frmModificarUsuario.botonEnviar.addEventListener("click",modificarUsuario,false);
+frmAltaClases.botonEnviar.addEventListener("click",altaClase,false);
 frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 
 //Creamos el objeto gestion y despues cargamos el documento XML
@@ -130,7 +130,7 @@ function altaClase(){
     let sTipoClase = document.querySelector('.tipoClase').value;     
     let idInstructor = document.querySelector('.idInstructorClase').value;
     
-    oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor));
+    alert(oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor)));
 }
 function cargarPistas(){
     //Cargarmos las pista desde el XML
