@@ -57,6 +57,17 @@ legend {
     background-color: #F2F2F2;
 }
 
+#frmAltaPista {
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 auto;
+    display: none;
+    border: 1px solid rgb(201, 201, 201);
+    box-shadow: 5px 5px rgb(230, 230, 230);
+    padding: 1.5em;
+    background-color: #F2F2F2;
+}
+
 #frmAltaReserva {
     width: 100%;
     max-width: fit-content;
@@ -66,9 +77,20 @@ legend {
     box-shadow: 5px 5px rgb(230, 230, 230);
     padding: 1.5em;
     background-color: #F2F2F2;
-  }
+}
 
 #frmAltaClases {
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 auto;
+    display: none;
+    border: 1px solid rgb(201, 201, 201);
+    box-shadow: 5px 5px rgb(230, 230, 230);
+    padding: 1.5em;
+    background-color: #F2F2F2;
+}
+
+#frmApuntarClase {
     width: 100%;
     max-width: fit-content;
     margin: 0 auto;

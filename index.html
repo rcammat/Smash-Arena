@@ -22,17 +22,23 @@
                         <a href="#" class="opcion nav-link" id="modificarUsuario">Modificar Usuario</a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="opcion nav-link" id="altaPista">Alta Pista</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="opcion nav-link" id="alquilarPista">Alquilar Pista</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="opcion nav-link" id="crearClase">Alta Clase</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="opcion nav-link" id="apuntarClase">Apuntarse a una Clase</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
         <div class="formularios">
-        <!--Formulario Alta Usuario-->
+            <!--Formulario Alta Usuario-->
             <div class="divfrmAltaUsuario">
                 <form name="frmAltaUsuario" id="frmAltaUsuario">
                     <legend><b>Alta de Usuario</b></legend>
@@ -99,6 +105,23 @@
                         <input class="form-check-input" type="checkbox" role="switch" name="checkInstructor" id="checkInstructorModificar">
                         <label class="form-check-label" for="checkInstructor">Instructor</label>
                       </div>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                </form>
+            </div>
+            <!--Formulario Alta Pista-->
+            <div class="divfrmAltaPista">
+                <form name="frmAltaPista" id="frmAltaPista">
+                    <legend><b>Alta de Pista</b></legend>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text nombrePista" id="basic-addon1">Nombre</span>
+                        <input type="text" class="form-control nombrePista"  name="idReserva" placeholder="Nombre de la Pista" aria-label="DNI de la reserva" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text numeroPista" id="basic-addon1">Número</span>
+                        <input type="number" class="form-control numeroPista" placeholder="Número de la Pista" aria-label="numero" aria-describedby="basic-addon1">
+                    </div>
                     <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
                     <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
                 </form>
@@ -172,6 +195,22 @@
                         <span class="input-group-text idInstructorClase" id="basic-addon1">Instructor</span>
                         <input type="number" class="form-control idInstructorClase" placeholder="ID del Instructor" aria-label="ID del Instructor" aria-describedby="basic-addon1">
                     </div>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                </form>
+            </div>
+            <!--Formulario Apuntarse a una Clase-->
+            <div class="divfrmApuntarClase">
+                <form name="frmApuntarClase" id="frmApuntarClase">
+                    <legend><b>Apuntarse a una Clase</b></legend>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text dniUsuario" id="basic-addon1">ID</span>
+                        <input type="text" class="form-control dniUsuario" placeholder="DNI del Usuario" aria-label="DNI del Usuario" aria-describedby="basic-addon1">
+                    </div>
+                    <select class="form-select mb-3" aria-label="Selecciona una Clase" id="comboClases">
+                        <option selected value = "nulo">Selecciona una clase...</option>
+                    </select>
                     <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
                     <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
                 </form>

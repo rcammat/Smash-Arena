@@ -1,8 +1,10 @@
 //Añadir eventos
 document.getElementById('altaUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('modificarUsuario').addEventListener("click",mostrarFormulario,false);
+document.getElementById('altaPista').addEventListener("click",mostrarFormulario,false);
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
 document.getElementById('crearClase').addEventListener("click",mostrarFormulario,false);
+document.getElementById('apuntarClase').addEventListener("click",mostrarFormulario,false);
 frmAltaUsuario.botonEnviar.addEventListener("click",altaUsuario,false);
 document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosUsuario,false);
 frmModificarUsuario.botonEnviar.addEventListener("click",modificarUsuario,false);
@@ -91,6 +93,12 @@ function mostrarFormulario(oE){
             break;
         case "Alta Clase" :
             frmAltaClases.style.display = "block";
+            break;
+        case "Alta Pista" :
+            frmAltaPista.style.display = "block";
+            break;
+        case "Apuntarse a una Clase" :
+            frmApuntarClase.style.display = "block";
             break;
     }
 }
