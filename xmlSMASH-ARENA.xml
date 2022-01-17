@@ -16,6 +16,22 @@
         <instructor>No</instructor>
     </usuario>
 
+    <usuario>
+		<nombre>Juan</nombre>
+		<dni>52485798U</dni>
+		<edad>55</edad>
+		<sexo>Masculino</sexo>
+		<instructor>Si</instructor>
+	</usuario>
+
+	<usuario>
+		<nombre>Maria</nombre>
+		<dni>48735692F</dni>
+		<edad>28</edad>
+		<sexo>Femenino</sexo>
+		<instructor>Si</instructor>
+	</usuario>
+
     <pista>
         <nombre>Pista 1</nombre>
         <numero>1</numero>

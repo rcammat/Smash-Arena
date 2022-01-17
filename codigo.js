@@ -10,15 +10,15 @@ frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 
 
 var oGestion = new Gestion();
-var oXML = loadXMLDoc("datosdeprueba.xml");
+var oXML = loadXMLDoc("xmlSMASH-ARENA.xml");
 var oUsuarios = oXML.getElementsByTagName("usuario");
 for(let oUsu of oUsuarios){
     let sNombreUsuario = oUsu.getElementsByTagName("nombre")[0].textContent;
-    let sDNI = oUsu.getElementsByTagName("DNI")[0].textContent;
+    let sDNI = oUsu.getElementsByTagName("dni")[0].textContent;
     let iEdad = oUsu.getElementsByTagName("edad")[0].textContent;
     let bSexo = oUsu.getElementsByTagName("sexo")[0].textContent;
     let bInstructor = oUsu.getElementsByTagName("instructor")[0].textContent;
-    if(bSexo=="Hombre"){
+    if(bSexo=="Masculino"){
         bSexo=true;
     }else {
         bSexo=false
