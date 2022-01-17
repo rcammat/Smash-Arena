@@ -10,7 +10,7 @@ class Gestion {
             oGestion.aUsuarios.push(oUsuario);
             return "Alta OK";
         }else {
-            return "Alta no OK";
+            return "Ya hay un usuario con ese DNI";
         }
     }
     modificarUsuario(sDNIABuscar,sDNIAGuardar,sNombreApe,iEdad,bSexo,bEsInstructor){
@@ -31,6 +31,14 @@ class Gestion {
             return oUsuario[0];
         }
  
+    }
+    altaPista(oPista){
+        if(oGestion.aPistas.filter(oP => oP.id == oPista.id).length == 0){
+            oGestion.aPistas.push(oPista);
+            return "Alta Ok";
+        }else {
+            return "Ya hay una pista con el mismo número"
+        }
     }
     altaReserva(oReserva)
     {

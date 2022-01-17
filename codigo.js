@@ -1,3 +1,4 @@
+//Añadir eventos
 document.getElementById('altaUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('modificarUsuario').addEventListener("click",mostrarFormulario,false);
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
@@ -8,56 +9,44 @@ document.getElementsByName('botonEnviar')[1].addEventListener("click",modificarU
 document.getElementsByName('botonEnviar')[3].addEventListener("click",altaClase,false);
 frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 
-
+//Creamos el objeto gestion y despues cargamos el documento XML
 var oGestion = new Gestion();
 var oXML = loadXMLDoc("xmlSMASH-ARENA.xml");
-var oUsuarios = oXML.getElementsByTagName("usuario");
-for(let oUsu of oUsuarios){
-    let sNombreUsuario = oUsu.getElementsByTagName("nombre")[0].textContent;
-    let sDNI = oUsu.getElementsByTagName("dni")[0].textContent;
-    let iEdad = oUsu.getElementsByTagName("edad")[0].textContent;
-    let bSexo = oUsu.getElementsByTagName("sexo")[0].textContent;
-    let bInstructor = oUsu.getElementsByTagName("instructor")[0].textContent;
-    if(bSexo=="Masculino"){
+
+//Llamada a todas las funciones principales
+cargarUsuarios();
+cargarPistas();
+cargarComboPistas();
+cargarComboUsuarios();
+
+//Alta Usuario
+function altaUsuario() {     
+    let sNombreUsuario = document.querySelector(".nombreUsuario").value;     
+    let sDNI = document.querySelector(".dniUsuario").value;     
+    let iEdad = document.querySelector(".Edad").value;     
+    let bSexo;
+    let bInstructor;
+    if(document.getElementById('radioSexoHombreAltaUsuario').checked){
         bSexo=true;
     }else {
-        bSexo=false
+        bSexo=false;
     }
-    if(bInstructor=="Si"){
-        bInstructor=true
+    if(document.getElementsByName('checkInstructor')[0].checked){
+        bInstructor=true;
     }else {
         bInstructor=false;
     }
-    oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)); 
+    if(sNombreUsuario == "" || sDNI == "" || iEdad == "" ){
+        alert("Debes rellenar todos los campos");
+    }else {
+        alert(oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)));
+        cargarComboUsuarios();
+        frmAltaUsuario.reset();
+        ocultarTodosFormularios();
+    }
 }
-cargaPistas();
-cargarComboUsuarios();
 
-function altaUsuario() {     
-let sNombreUsuario = document.querySelector(".nombreUsuario").value;     
-let sDNI = document.querySelector(".dniUsuario").value;     
-let iEdad = document.querySelector(".Edad").value;     
-let bSexo;
-let bInstructor;
-if(document.getElementById('radioSexoHombreAltaUsuario').checked){
-    bSexo=true;
-}else {
-    bSexo=false;
-}
-if(document.getElementsByName('checkInstructor')[0].checked){
-    bInstructor=true;
-}else {
-    bInstructor=false;
-}
-if(sNombreUsuario == "" || sDNI == "" || iEdad == "" ){
-    alert("Debes rellenar todos los campos");
-}else {
-    alert(oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)));
-    cargarComboUsuarios();
-    frmAltaUsuario.reset();
-    ocultarTodosFormularios();
-}
-}
+//Modificar Usuario
 function modificarUsuario() {
     let sNombreUsuario = document.querySelector(".nombreUsuarioModificar").value;
     let sDNIABuscar = document.getElementById("comboUsuarios");
@@ -100,7 +89,7 @@ function mostrarFormulario(oE){
         case "Modificar Usuario" :
             frmModificarUsuario.style.display = "block";
             break;
-        case "Crear clase de Padel" :
+        case "Alta Clase" :
             frmAltaClases.style.display = "block";
             break;
     }
@@ -143,31 +132,15 @@ function altaClase(){
     
     oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor));
 }
-function cargaPistas(){
-    //Provisional 
-    oGestion.aPistas.push(new Pista("Pista 1",1));
-    oGestion.aPistas.push(new Pista("Pista 2",2));
-    oGestion.aPistas.push(new Pista("Pista 3",3));
-
-
-
-    //Esto si sirve
-    oCapa = document.getElementById("comboPistas");
-    /*oCapa.appendChild(document.createElement("SELECT"));*/
-
-    //console.log(oCapa);
-
-    /*let select = oCapa.lastChild;
-    select.id="seleccionPistas";
-    select.name="seleccionPistas";*/
-
-
-    for (oPista of oGestion.aPistas){
-        oCapa.appendChild(document.createElement("OPTION"));
-        oCapa.lastChild.value = oPista.id;
-        oCapa.lastChild.textContent = oPista.nombre;
+function cargarPistas(){
+    //Cargarmos las pista desde el XML
+    oPistas = oXML.getElementsByTagName("pista");
+    for(let oPista of oPistas){
+        let nombrePista = oPista.getElementsByTagName("nombre")[0].textContent;
+        let numeroPista = oPista.getElementsByTagName("numero")[0].textContent;
+        
+        oGestion.altaPista(new Pista(nombrePista,numeroPista));
     }
-
 }
 function cargarComboUsuarios() {
     let oCapa = document.getElementById('comboUsuarios');
@@ -206,13 +179,43 @@ function mostrarDatosUsuario() {
         frmModificarUsuario.reset();
     }
 }
+function cargarUsuarios() {
+    var oUsuarios = oXML.getElementsByTagName("usuario");
+    for(let oUsu of oUsuarios){
+        let sNombreUsuario = oUsu.getElementsByTagName("nombre")[0].textContent;
+        let sDNI = oUsu.getElementsByTagName("dni")[0].textContent;
+        let iEdad = oUsu.getElementsByTagName("edad")[0].textContent;
+        let bSexo = oUsu.getElementsByTagName("sexo")[0].textContent;
+        let bInstructor = oUsu.getElementsByTagName("instructor")[0].textContent;
+        if(bSexo=="Masculino"){
+            bSexo=true;
+        }else {
+            bSexo=false
+        }
+        if(bInstructor=="Si"){
+            bInstructor=true
+        }else {
+            bInstructor=false;
+        }
+        oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)); 
+    }
+}
 function ocultarTodosFormularios() {
     let oFormularios = document.querySelectorAll("form");
     for(let oFor of oFormularios){
         oFor.style.display = "none";
     }
 }
-
+function cargarComboPistas() {
+    //Esto si sirve
+    oCapa = document.getElementById("comboPistas");
+    for (oPista of oGestion.aPistas){
+        oCapa.appendChild(document.createElement("OPTION"));
+        oCapa.lastChild.value = oPista.id;
+        oCapa.lastChild.textContent = oPista.nombre;
+    }
+    
+}
 function loadXMLDoc(filename)
 {
 	if (window.XMLHttpRequest)
