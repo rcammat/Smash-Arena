@@ -254,7 +254,7 @@ function cargarComboClases(){
     for(let clase of oGestion.aClases){
         oCapa.appendChild(document.createElement("OPTION"));
         oCapa.lastChild.value = clase.ID;
-        oCapa.lastChild.textContent = clase.Nombre+" "+clase.Inicio.getHours()+"H";
+        oCapa.lastChild.textContent = clase.Nombre+" "+clase.Inicio.toLocaleDateString("es-ES")+" "+clase.Inicio.getHours()+"H";
     }
 
 
