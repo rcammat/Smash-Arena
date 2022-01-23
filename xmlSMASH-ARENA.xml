@@ -62,10 +62,10 @@
 
     <clase>
         <iIdClase>1</iIdClase>
-        <sNombre>Joaquín</sNombre>
+        <sNombre>Clase de Padel</sNombre>
         <sDescripcion>Clase de padel</sDescripcion>
-        <dtInicio>17:00</dtInicio>
-        <dtFin>18:30</dtFin>
+        <dtInicio> 2022-01-28 17:00:00</dtInicio>
+        <dtFin>2022-01-28 18:30:00</dtFin>
         <iCapacidad>10</iCapacidad>
         <sTipoActividad>Padel</sTipoActividad>
         <siIdInstructor>3</siIdInstructor>
@@ -73,10 +73,10 @@
 
      <clase>
         <iIdClase>2</iIdClase>
-        <sNombre>Lucas</sNombre>
+        <sNombre>Clase de Padel</sNombre>
         <sDescripcion>Clase de padel</sDescripcion>
-        <dtInicio>21:00</dtInicio>
-        <dtFin>23:30</dtFin>
+        <dtInicio>2022-01-28 21:00:00</dtInicio>
+        <dtFin>2022-01-28 23:30:00</dtFin>
         <iCapacidad>5</iCapacidad>
         <sTipoActividad>Padel niños</sTipoActividad>
         <siIdInstructor>2</siIdInstructor>

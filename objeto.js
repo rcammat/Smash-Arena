@@ -178,8 +178,14 @@ class Clase {
     get ID(){
         return this.iIdClase;
     }
+    get Nombre(){
+        return this.sNombre;
+    }
     set Usuarios(aUsuarios){
         this.aUsuarios = aUsuarios;
+    }
+    get Inicio(){
+        return this.dtInicio;
     }
     set Inicio(dtInicio){
         this.dtInicio = dtInicio;

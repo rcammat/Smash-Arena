@@ -18,8 +18,10 @@ var oXML = loadXMLDoc("xmlSMASH-ARENA.xml");
 //Llamada a todas las funciones principales
 cargarUsuarios();
 cargarPistas();
+cargarClases();
 cargarComboPistas();
 cargarComboUsuarios();
+cargarComboClases();
 
 //Alta Usuario
 function altaUsuario() {     
@@ -223,6 +225,39 @@ function cargarComboPistas() {
         oCapa.lastChild.textContent = oPista.nombre;
     }
     
+}
+
+function cargarClases(){
+    var oClases = oXML.getElementsByTagName("clase");
+    for(oCla of oClases){
+        let iIDClase = oCla.getElementsByTagName("iIdClase")[0].textContent;
+        let sNombre = oCla.getElementsByTagName("sNombre")[0].textContent;
+        let sDescripcion = oCla.getElementsByTagName("sDescripcion")[0].textContent;
+        let dtInicio = new Date(oCla.getElementsByTagName("dtInicio")[0].textContent);
+        let dtFin = new Date(oCla.getElementsByTagName("dtFin")[0].textContent);
+        let iCapacidad = oCla.getElementsByTagName("iCapacidad")[0].textContent;
+        let sTipoActividad = oCla.getElementsByTagName("sTipoActividad")[0].textContent;
+        let siIdInstructor = oCla.getElementsByTagName("siIdInstructor")[0].textContent;
+
+        oGestion.altaClase(new Clase(iIDClase,sNombre,sDescripcion,dtInicio,dtFin,iCapacidad,sTipoActividad,siIdInstructor));
+    }
+}
+
+function cargarComboClases(){
+    let oCapa = frmApuntarClase.comboClasesApuntarseClase;
+    while(oCapa.hasChildNodes()){
+        oCapa.removeChild(oCapa.firstChild);
+    }
+    oCapa.appendChild(document.createElement("OPTION"))
+    oCapa.lastChild.value = "nulo";
+    oCapa.lastChild.textContent = "Selecciona un usuario...";
+    for(let clase of oGestion.aClases){
+        oCapa.appendChild(document.createElement("OPTION"));
+        oCapa.lastChild.value = clase.ID;
+        oCapa.lastChild.textContent = clase.Nombre+" "+clase.Inicio.getHours()+"H";
+    }
+
+
 }
 function loadXMLDoc(filename)
 {
