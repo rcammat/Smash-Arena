@@ -250,7 +250,7 @@ function cargarComboClases(){
     }
     oCapa.appendChild(document.createElement("OPTION"))
     oCapa.lastChild.value = "nulo";
-    oCapa.lastChild.textContent = "Selecciona un usuario...";
+    oCapa.lastChild.textContent = "Selecciona una clase...";
     for(let clase of oGestion.aClases){
         oCapa.appendChild(document.createElement("OPTION"));
         oCapa.lastChild.value = clase.ID;
