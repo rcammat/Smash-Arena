@@ -10,6 +10,7 @@ document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosU
 frmModificarUsuario.botonEnviar.addEventListener("click",modificarUsuario,false);
 frmAltaClases.botonEnviar.addEventListener("click",altaClase,false);
 frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
+frmAltaPista.botonEnviar.addEventListener("click",altaPista,false);
 
 //Creamos el objeto gestion y despues cargamos el documento XML
 var oGestion = new Gestion();
@@ -142,6 +143,14 @@ function altaClase(){
     
     alert(oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor)));
 }
+
+function altaPista(){
+    let sNombrePista = document.querySelector(".nombrePista").value;
+    let iIDPista = document.querySelector(".numeroPista").value;
+
+    alert(oGestion.altaPista(new Pista(sNombrePista,iIDPista)));
+    cargarComboPistas();
+}
 function cargarPistas(){
     //Cargarmos las pista desde el XML
     oPistas = oXML.getElementsByTagName("pista");
@@ -217,8 +226,13 @@ function ocultarTodosFormularios() {
     }
 }
 function cargarComboPistas() {
-    //Esto si sirve
-    oCapa = document.getElementById("comboPistas");
+    let oCapa = document.getElementById("comboPistas");
+    while(oCapa.hasChildNodes()){
+        oCapa.removeChild(oCapa.firstChild);
+    }
+    oCapa.appendChild(document.createElement("OPTION"))
+    oCapa.lastChild.value = "nulo";
+    oCapa.lastChild.textContent = "Selecciona una clase..."
     for (oPista of oGestion.aPistas){
         oCapa.appendChild(document.createElement("OPTION"));
         oCapa.lastChild.value = oPista.id;
