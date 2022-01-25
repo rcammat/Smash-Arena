@@ -123,21 +123,34 @@ function hacerReserva()
     let nomReserva = frmAltaReserva.nombreReserva.value;
     let descripcionReserva = frmAltaReserva.descripcionReserva.value;
     //Para hacer la fecha de inicio y de fin con sus horas.
-    let diaReserva = new Date(frmAltaReserva.diaReserva.value);
+    let fechaReserva = new Date(frmAltaReserva.diaReserva.value);
     let StringInicioReserva = frmAltaReserva.horaInicioReserva.value;
     let arrayHora = StringInicioReserva.split(":");
-    let fechaReserva = new Date(diaReserva.getFullYear(), diaReserva.getMonth() , diaReserva.getDay(), arrayHora[0] ,arrayHora[1] ,00,00);
+    fechaReserva.setHours(arrayHora[0]);
+    fechaReserva.setMinutes(arrayHora[1]);
     let fechaFin = new Date (fechaReserva);
     fechaFin.setHours(fechaReserva.getHours()+1); 
-   
+    //Ya tenemos la fecha inicio y fin.
 
-    let pistaSelecionada = frmAltaReserva.comboPistas.value;
+    //Control de errores antes de crear el objeto.
+    let hoy = fechaHoy();
+    console.log(hoy);
 
+    if(fechaReserva < hoy)
+    {
+        alert("Aristoteles 2015 : No puede reservar en el pasado.");
+    }
 
-    oReserva = new Reserva(nomReserva,descripcionReserva,fechaReserva,fechaFin,pistaSelecionada,idReserva);
-    console.log(oReserva);
+    else{
+        let pistaSelecionada = frmAltaReserva.comboPistas.value;
+        oReserva = new Reserva(nomReserva,descripcionReserva,fechaReserva,fechaFin,pistaSelecionada,idReserva);
+        console.log(oReserva);
 
-    alert(oGestion.altaReserva(oReserva));
+        alert(oGestion.altaReserva(oReserva));
+        // Todo fue correcto borramos los datos.
+        frmAltaReserva.reset(); 
+        ocultarTodosFormularios();
+    }
 
 }
 
@@ -331,3 +344,6 @@ function loadXMLDoc(filename)
 	
 	return xhttp.responseXML;
 } 
+
+
+function fechaHoy(){return new Date(Date.now())};

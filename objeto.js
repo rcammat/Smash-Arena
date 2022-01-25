@@ -48,7 +48,12 @@ class Gestion {
 
         //Comprobrar que el usuario este registrado .
 
+        if(oGestion.buscarUsuario(oReserva.dniReserva)==null) //existe.
+            message="El usuario no esta registrado en la web.";
+        else
+    {   
 
+        //Se puede comprobar que el usuario no este ese dia a la misma hora en otra pista.
         for(let reserva of pista.reservas)
         {
             if(oReserva.dFechaReserva > reserva.dFechaReserva && oReserva.dFechaReserva < reserva.dFechaFin)
@@ -62,7 +67,7 @@ class Gestion {
            pista.reservas.push(oReserva);
            message="Se realizo la reserva de la pista de forma correcta.";
         }
-
+    }
         return message;
     }
     altaClase(oClase){
@@ -96,7 +101,7 @@ class Gestion {
         let oClase = oGestion.aClases.filter(oClase => oClase.ID == iIDClase)[0];
         if(oUsuario!=null){
             if(oClase.Usuarios.length<oClase.Capacidad){
-                if(oClase.Usuarios.filter(oUsu => oUsu.ID == oUsuario.ID).length == 0){
+                if(oClase.Usuarios.filter(oUsu => oUsu.DNI == oUsuario.DNI).length == 0){
                     if (oUsuario.DNI!=oClase.Instructor) {
                         oClase.Usuarios.push(oUsuario);
                         return "Apuntado Correctamente";
@@ -152,6 +157,9 @@ class Reserva{
     }
     get fechaFin(){
         return this.dFechaFin;
+    }
+    get dniReserva(){
+        return this.sUsuarioReserva;
     }
 }
 class Usuario {
