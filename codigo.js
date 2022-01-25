@@ -5,12 +5,14 @@ document.getElementById('altaPista').addEventListener("click",mostrarFormulario,
 document.getElementById('alquilarPista').addEventListener("click",mostrarFormulario,false);
 document.getElementById('crearClase').addEventListener("click",mostrarFormulario,false);
 document.getElementById('apuntarClase').addEventListener("click",mostrarFormulario,false);
+document.getElementById('listados').addEventListener("click",mostrarFormulario,false);
 frmAltaUsuario.botonEnviar.addEventListener("click",altaUsuario,false);
 document.getElementById('comboUsuarios').addEventListener("change",mostrarDatosUsuario,false);
 frmModificarUsuario.botonEnviar.addEventListener("click",modificarUsuario,false);
 frmAltaClases.botonEnviar.addEventListener("click",altaClase,false);
 frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 frmAltaPista.botonEnviar.addEventListener("click",altaPista,false);
+frmListados.botonEnviar.addEventListener("click",listado,false);
 
 //Creamos el objeto gestion y despues cargamos el documento XML
 var oGestion = new Gestion();
@@ -102,6 +104,9 @@ function mostrarFormulario(oE){
             break;
         case "Apuntarse a una Clase" :
             frmApuntarClase.style.display = "block";
+            break;
+        case "Listados" :
+            frmListados.style.display = "block";
             break;
     }
 }

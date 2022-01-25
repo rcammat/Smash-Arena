@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a href="#" class="opcion nav-link" id="apuntarClase">Apuntarse a una Clase</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="opcion nav-link" id="listados">Listados</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -105,8 +108,8 @@
                         <input class="form-check-input" type="checkbox" role="switch" name="checkInstructor" id="checkInstructorModificar">
                         <label class="form-check-label" for="checkInstructor">Instructor</label>
                       </div>
-                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary">
                 </form>
             </div>
             <!--Formulario Alta Pista-->
@@ -122,8 +125,8 @@
                         <span class="input-group-text" id="basic-addon1">Número</span>
                         <input type="number" class="form-control numeroPista" placeholder="Número de la Pista" aria-label="numero" aria-describedby="basic-addon1">
                     </div>
-                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary">
                 </form>
             </div>
             <!--Formulario Alta Reserva-->
@@ -154,8 +157,8 @@
                     <select class="form-select mb-3" aria-label="Selecciona una Pista" name="comboPistas" id="comboPistas">
                         <option selected>Selecciona una pista...</option>
                     </select>
-                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary">
                 </form>
             </div>
             <!--Formulario Alta Clases-->
@@ -184,6 +187,14 @@
                         <input type="date" class="form-control diaFinClase" aria-label="Día de fin de la Clase" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Hora Inicio</span>
+                        <input type="time" class="form-control horaInicioClase" aria-label="Hora de Inicio de la Clase">
+                    </div>
+                    <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Hora Fin</span>
+                            <input type="time" class="form-control horaFinClase" aria-label="Hora de Fin de la Clase">
+                        </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Capacidad</span>
                         <input type="number" class="form-control capacidadClase" placeholder="Capacidad de la Clase" aria-label="ID de la Clase" aria-describedby="basic-addon1">
                     </div>
@@ -195,8 +206,8 @@
                         <span class="input-group-text" id="basic-addon1">Instructor</span>
                         <input type="number" class="form-control idInstructorClase" placeholder="ID del Instructor" aria-label="ID del Instructor" aria-describedby="basic-addon1">
                     </div>
-                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary">
                 </form>
             </div>
             <!--Formulario Apuntarse a una Clase-->
@@ -211,8 +222,22 @@
                     <select class="form-select mb-3" aria-label="Selecciona una Clase" id="comboClasesApuntarseClase" name="comboClasesApuntarseClase">
                         <option selected value = "nulo">Selecciona una clase...</option>
                     </select>
-                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary"></input>
-                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary"></input>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
+                    <input type="reset" name="botonCancelar" value="Cancelar" class="btn btn-secondary">
+                </form>
+            </div>
+            <!--Formulario Listados-->
+            <div class="divfrmListados">
+                <form name="frmListados" id="frmListados">
+                    <legend><b>Listados</b></legend>
+                    <hr>
+                    <select class="form-select mb-3" aria-label="Selecciona un Listado" id="basic-addon1 comboListados">
+                        <option value="nulo">Selecciona un listado...</option>
+                        <option value="usuarios">Listado de Usuarios</option>
+                        <option value="pistas">Listado de Pistas</option>
+                        <option value="clases">Listado de Clases</option>
+                    </select>
+                    <input type="button" name="botonEnviar" value="Aceptar" class="btn btn-primary">
                 </form>
             </div>
         </div>
