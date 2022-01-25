@@ -12,11 +12,14 @@ frmModificarUsuario.botonEnviar.addEventListener("click",modificarUsuario,false)
 frmAltaClases.botonEnviar.addEventListener("click",altaClase,false);
 frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 frmAltaPista.botonEnviar.addEventListener("click",altaPista,false);
-frmListados.botonEnviar.addEventListener("click",listado,false);
+frmApuntarClase.botonEnviar.addEventListener("click",apuntarseClase,false);
+//frmListados.botonEnviar.addEventListener("click",listado,false);
+
 
 //Creamos el objeto gestion y despues cargamos el documento XML
 var oGestion = new Gestion();
 var oXML = loadXMLDoc("xmlSMASH-ARENA.xml");
+
 
 //Llamada a todas las funciones principales
 cargarUsuarios();
@@ -26,7 +29,8 @@ cargarComboPistas();
 cargarComboUsuarios();
 cargarComboClases();
 
-//Alta Usuario
+
+//Alta Usuario                                          
 function altaUsuario() {     
     let sNombreUsuario = document.querySelector(".nombreUsuario").value;     
     let sDNI = document.querySelector(".dniUsuario").value;     
@@ -52,7 +56,7 @@ function altaUsuario() {
         ocultarTodosFormularios();
     }
 }
-
+//----------------------------------------------------------------------------------------------------//
 //Modificar Usuario
 function modificarUsuario() {
     let sNombreUsuario = document.querySelector(".nombreUsuarioModificar").value;
@@ -82,6 +86,7 @@ function modificarUsuario() {
     }
 }
 
+//Mostrar todos los formularios (Si se añade un formulario se debe añadir el case correspondiente)
 function mostrarFormulario(oE){
     ocultarTodosFormularios();
     oEvento = oE || window.event;
@@ -111,7 +116,7 @@ function mostrarFormulario(oE){
     }
 }
 
-
+//Reservar Pista
 function hacerReserva()
 {
     let idReserva = frmAltaReserva.idReserva.value;
@@ -136,19 +141,28 @@ function hacerReserva()
 
 }
 
+//Alta Clase
 function altaClase(){     
     let iIdClase = document.querySelector(".idClase").value;     
     let sNombreClase = document.querySelector(".nombreClase").value;     
     let sDescripcionClase = document.querySelector(".descripcionClase").value;     
-    let dtDiaInicio = new Date(document.querySelector('.diaInicioClase').value);     
-    let dtDiaFin = new Date(document.querySelector('.diaFinClase').value);     
+    let dtDiaInicio = new Date(document.querySelector('.diaInicioClase').value);
+    let horaInicio = new Date("1/1/1 "+document.querySelector(".horaInicioClase").value);
+    dtDiaInicio.setHours(horaInicio.getHours());
+    dtDiaInicio.setMinutes(horaInicio.getMinutes());     
+    let dtDiaFin = new Date(document.querySelector('.diaFinClase').value);
+    let horaFin = new Date ("1/1/1 "+document.querySelector(".horaFinClase").value);
+    dtDiaFin.setHours(horaFin.getHours());
+    dtDiaFin.setMinutes(horaFin.getMinutes());
     let iCapacidad = document.querySelector('.capacidadClase').value;     
     let sTipoClase = document.querySelector('.tipoClase').value;     
     let idInstructor = document.querySelector('.idInstructorClase').value;
-    
+
     alert(oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor)));
+    cargarComboClases();
 }
 
+//Alta Pista
 function altaPista(){
     let sNombrePista = document.querySelector(".nombrePista").value;
     let iIDPista = document.querySelector(".numeroPista").value;
@@ -156,6 +170,17 @@ function altaPista(){
     alert(oGestion.altaPista(new Pista(sNombrePista,iIDPista)));
     cargarComboPistas();
 }
+
+//Apuntarse Clase
+function apuntarseClase() {
+    let sDNI = document.querySelector(".dniUsuarioApuntarseClase").value;
+    let indexCombo = document.querySelector("#comboClasesApuntarseClase").selectedIndex;
+    let iIDClase = document.querySelector("#comboClasesApuntarseClase")[indexCombo].value;
+    
+    alert(oGestion.apuntarseClase(sDNI,iIDClase));
+}
+
+//Cargar pistas desde XML
 function cargarPistas(){
     //Cargarmos las pista desde el XML
     oPistas = oXML.getElementsByTagName("pista");
@@ -166,6 +191,8 @@ function cargarPistas(){
         oGestion.altaPista(new Pista(nombrePista,numeroPista));
     }
 }
+
+//Crea el combo de usuarios para modificarlos
 function cargarComboUsuarios() {
     let oCapa = document.getElementById('comboUsuarios');
     while(oCapa.hasChildNodes()){
@@ -180,6 +207,8 @@ function cargarComboUsuarios() {
         oCapa.lastChild.textContent = usuario.NombreAp
     }
 }
+
+//Cuando selecciona un usuario del combo pinta los datos del usuario
 function mostrarDatosUsuario() {
     let sDNI = document.getElementById('comboUsuarios').value;
     if( sDNI != "nulo"){
@@ -203,6 +232,8 @@ function mostrarDatosUsuario() {
         frmModificarUsuario.reset();
     }
 }
+
+//Cargar los usuarios desde el XML
 function cargarUsuarios() {
     var oUsuarios = oXML.getElementsByTagName("usuario");
     for(let oUsu of oUsuarios){
@@ -224,12 +255,16 @@ function cargarUsuarios() {
         oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)); 
     }
 }
+
+//Oculta todos los formularios
 function ocultarTodosFormularios() {
     let oFormularios = document.querySelectorAll("form");
     for(let oFor of oFormularios){
         oFor.style.display = "none";
     }
 }
+
+//Crea el combo de pistas para alquilarlas 
 function cargarComboPistas() {
     let oCapa = document.getElementById("comboPistas");
     while(oCapa.hasChildNodes()){
@@ -246,6 +281,7 @@ function cargarComboPistas() {
     
 }
 
+//Carga las clase desde el XML
 function cargarClases(){
     var oClases = oXML.getElementsByTagName("clase");
     for(oCla of oClases){
@@ -254,7 +290,7 @@ function cargarClases(){
         let sDescripcion = oCla.getElementsByTagName("sDescripcion")[0].textContent;
         let dtInicio = new Date(oCla.getElementsByTagName("dtInicio")[0].textContent);
         let dtFin = new Date(oCla.getElementsByTagName("dtFin")[0].textContent);
-        let iCapacidad = oCla.getElementsByTagName("iCapacidad")[0].textContent;
+        let iCapacidad = parseInt(oCla.getElementsByTagName("iCapacidad")[0].textContent);
         let sTipoActividad = oCla.getElementsByTagName("sTipoActividad")[0].textContent;
         let siIdInstructor = oCla.getElementsByTagName("siIdInstructor")[0].textContent;
 
@@ -262,6 +298,7 @@ function cargarClases(){
     }
 }
 
+//Crea el combo de clases para apuntarse a ellas
 function cargarComboClases(){
     let oCapa = frmApuntarClase.comboClasesApuntarseClase;
     while(oCapa.hasChildNodes()){
@@ -275,9 +312,9 @@ function cargarComboClases(){
         oCapa.lastChild.value = clase.ID;
         oCapa.lastChild.textContent = clase.Nombre+" "+clase.Inicio.toLocaleDateString("es-ES")+" "+clase.Inicio.getHours()+"H";
     }
-
-
 }
+
+//Funcion para cargar los XML
 function loadXMLDoc(filename)
 {
 	if (window.XMLHttpRequest)

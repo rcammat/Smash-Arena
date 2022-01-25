@@ -68,7 +68,7 @@
         <dtFin>2022-01-28 18:30:00</dtFin>
         <iCapacidad>10</iCapacidad>
         <sTipoActividad>Padel</sTipoActividad>
-        <siIdInstructor>3</siIdInstructor>
+        <siIdInstructor>48735692F</siIdInstructor>
     </clase>
 
      <clase>
@@ -79,7 +79,7 @@
         <dtFin>2022-01-28 23:30:00</dtFin>
         <iCapacidad>5</iCapacidad>
         <sTipoActividad>Padel niños</sTipoActividad>
-        <siIdInstructor>2</siIdInstructor>
+        <siIdInstructor>52485798U</siIdInstructor>
     </clase>
 
 </gestion>

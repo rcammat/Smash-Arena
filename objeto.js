@@ -67,8 +67,19 @@ class Gestion {
     }
     altaClase(oClase){
         if(oGestion.aClases.filter(oCla => oCla.ID == oClase.ID).length == 0){
-            oGestion.aClases.push(oClase);
-            return "Alta Clase Ok";
+            let oInstructor = oGestion.buscarUsuario(oClase.Instructor);
+            if(oInstructor!=null){
+                if(oInstructor.EsInstructor == true){
+                    oGestion.aClases.push(oClase);
+                    return "Alta Clase Ok";
+                }else {
+                    return "El DNI es válido pero no es un instrcutor";
+                }
+
+            }else {
+                return "No existe un instructor con ese DNI";
+            }
+
         }else {
             return "Ya exise una clase con ese ID";
         }
@@ -80,7 +91,29 @@ class Gestion {
         return oGestion.aClases
     }
 
+    apuntarseClase(sDNI,iIDClase){
+        let oUsuario = oGestion.buscarUsuario(sDNI);
+        let oClase = oGestion.aClases.filter(oClase => oClase.ID == iIDClase)[0];
+        if(oUsuario!=null){
+            if(oClase.Usuarios.length<oClase.Capacidad){
+                if(oClase.Usuarios.filter(oUsu => oUsu.ID == oUsuario.ID).length == 0){
+                    if (oUsuario.DNI!=oClase.Instructor) {
+                        oClase.Usuarios.push(oUsuario);
+                        return "Apuntado Correctamente";
+                    }else {
+                        return "El usuario es el instructor de la clase";
+                    }
 
+                }else {
+                    return "Ya estas apuntando en esta clase";
+                }
+            }else {
+                return "La clase está completa";
+            }
+        }else {
+            return "No existe un usuario con ese DNI";
+        }
+    }
 }
 class Pista{
     constructor (sNombre,iNumPista)
@@ -168,8 +201,8 @@ class Clase {
         this.iIdClase = iIdClase;
         this.sNombre = sNombre;
         this.sDescripcion = sDescripcion;
-        this.dtInicio = dtInicio;
-        this.dtFin = dtFin;
+        this.dtInicio = new Date(dtInicio);
+        this.dtFin = new Date(dtFin);
         this.iCapacidad = iCapacidad;
         this.sTipoActividad = sTipoActividad;
         this.aUsuarios = [];
@@ -180,6 +213,9 @@ class Clase {
     }
     get Nombre(){
         return this.sNombre;
+    }
+    get Usuarios(){
+        return this.aUsuarios;
     }
     set Usuarios(aUsuarios){
         this.aUsuarios = aUsuarios;
@@ -192,6 +228,12 @@ class Clase {
     }
     set Fin(dtFin){
         this.dtFin = dtFin;
+    }
+    get Capacidad(){
+        return this.iCapacidad;
+    }
+    get Instructor(){
+        return this.iIdInstructor;
     }
 }
 
