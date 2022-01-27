@@ -13,7 +13,8 @@ frmAltaClases.botonEnviar.addEventListener("click",altaClase,false);
 frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 frmAltaPista.botonEnviar.addEventListener("click",altaPista,false);
 frmApuntarClase.botonEnviar.addEventListener("click",apuntarseClase,false);
-//frmListados.botonEnviar.addEventListener("click",listado,false);
+frmListados.botonEnviar.addEventListener("click",manejadorListado,false);
+frmListados.botonEnviar.addEventListener("change",mostrarFiltros,false);
 
 
 //Creamos el objeto gestion y despues cargamos el documento XML
@@ -56,7 +57,7 @@ function altaUsuario() {
         ocultarTodosFormularios();
     }
 }
-//----------------------------------------------------------------------------------------------------//
+
 //Modificar Usuario
 function modificarUsuario() {
     let sNombreUsuario = document.querySelector(".nombreUsuarioModificar").value;
@@ -89,6 +90,7 @@ function modificarUsuario() {
 //Mostrar todos los formularios (Si se añade un formulario se debe añadir el case correspondiente)
 function mostrarFormulario(oE){
     ocultarTodosFormularios();
+    borrarTabla();
     oEvento = oE || window.event;
     oFormulario = oEvento.srcElement;
     switch(oFormulario.textContent){
@@ -115,7 +117,13 @@ function mostrarFormulario(oE){
             break;
     }
 }
-
+//borrarTabla
+function borrarTabla() {
+    let oTabla = document.querySelector(".table");
+    if(oTabla != null){
+        oTabla.remove();
+    }
+}
 //Reservar Pista
 function hacerReserva()
 {
@@ -170,11 +178,19 @@ function altaClase(){
     let iCapacidad = document.querySelector('.capacidadClase').value;     
     let sTipoClase = document.querySelector('.tipoClase').value;     
     let idInstructor = document.querySelector('.idInstructorClase').value;
-
-    alert(oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor)));
-    cargarComboClases();
+    let dtHoy = fechaHoy();
+    if(dtDiaFin < dtHoy || dtDiaInicio < dtHoy){
+        alert("Las fechas introducidas son menores al dia y hora actual");
+    }else {
+        if(dtDiaInicio < dtDiaFin){
+            alert(oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor)));
+            cargarComboClases();
+            frmAltaClases.reset();
+        }else {
+            alert("La fecha de inicio es mayor a la fecha de fin");
+        }
+    }
 }
-
 //Alta Pista
 function altaPista(){
     let sNombrePista = document.querySelector(".nombrePista").value;
@@ -325,6 +341,207 @@ function cargarComboClases(){
         oCapa.lastChild.value = clase.ID;
         oCapa.lastChild.textContent = clase.Nombre+" "+clase.Inicio.toLocaleDateString("es-ES")+" "+clase.Inicio.getHours()+"H";
     }
+}
+
+//Manejador de Listados
+
+function manejadorListado(){
+    let oCombo = document.querySelector("#comboListados");
+    let oOption = oCombo.children[oCombo.selectedIndex];
+    switch(oOption.value){
+        case "nulo":
+            alert("Debes seleccionar un listado");
+            break;
+        case "usuarios":
+            ocultarTodosFormularios();
+            listadoUsuarios();
+            break;
+        case "pistas":
+            ocultarTodosFormularios();
+            listadoPistas();
+            break;
+        case "clases":
+            ocultarTodosFormularios();
+            listadoClase();
+    }
+}
+
+//Listado de usuarios
+
+function listadoUsuarios(){
+    let oTabla = document.createElement("table");
+    let oCapa = document.querySelector(".formularios");
+    let oTH = document.createElement("th");
+    let oUsuarios = oGestion.usuarios;
+
+    oTabla.classList.add("table");
+  
+
+    let cabecera = oTabla.createTHead();
+
+
+    let filaCabecera = cabecera.insertRow(-1);
+    let celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "DNI";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Nombre Completo";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Edad";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Sexo";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Es Instructor";
+
+    let cuerpo = oTabla.createTBody();
+
+    for(let oUsu of oUsuarios){
+        let filaCuerpo = cuerpo.insertRow(-1);
+        let celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oUsu.DNI;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oUsu.NombreAp;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oUsu.Edad;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oUsu.Sexo?"Masculino":"Femenino";
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oUsu.EsInstructor?"Si":"No";
+
+    }
+    oCapa.appendChild(oTabla);
+    
+  
+}
+
+//listadoPistas
+
+function listadoPistas(){
+    let oTabla = document.createElement("table");
+    let oCapa = document.querySelector(".formularios");
+    let oTH = document.createElement("th");
+    let oPistas = oGestion.pistas;
+
+    oTabla.classList.add("table");
+  
+
+    let cabecera = oTabla.createTHead();
+
+
+    let filaCabecera = cabecera.insertRow(-1);
+    let celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "ID";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Nombre";
+
+    let cuerpo = oTabla.createTBody();
+
+    for(oPis of oPistas){
+        let filaCuerpo = cuerpo.insertRow(-1);
+        let celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oPis.id;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oPis.nombre;
+    }
+    oCapa.appendChild(oTabla);
+}
+
+//listadoClase
+function listadoClase(){
+    let oTabla = document.createElement("table");
+    let oCapa = document.querySelector(".formularios");
+    let oTH = document.createElement("th");
+    let oClases = oGestion.clases;
+
+    oTabla.classList.add("table");
+  
+
+    let cabecera = oTabla.createTHead();
+
+
+    let filaCabecera = cabecera.insertRow(-1);
+    let celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "ID";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Nombre";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Descripcion";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Fecha Inicio";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Fecha Fin";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Capacidad";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Tipo actividad";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Nombre Instructor";
+
+    let cuerpo = oTabla.createTBody();
+
+    for(oCla of oClases){
+        let filaCuerpo = cuerpo.insertRow(-1);
+        let celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.ID;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.Nombre;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.Descripcion;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.Inicio.toLocaleDateString("es-ES")+" "+ oCla.Inicio.getUTCHours()+":"+oCla.Inicio.getMinutes()+"H";
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.Fin.toLocaleDateString("es-ES")+" "+ oCla.Fin.getUTCHours()+":"+oCla.Fin.getMinutes()+"H";
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.Capacidad;
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oCla.Actividad;
+
+        let oInstructor = oGestion.buscarUsuario(oCla.Instructor);
+
+        celdaCuerpo = filaCuerpo.insertCell(-1);
+        celdaCuerpo.textContent = oInstructor.NombreAp;
+    }
+
+    oCapa.appendChild(oTabla);
+}
+
+//mostrarFiltros
+function mostrarFiltros(){
+
 }
 
 //Funcion para cargar los XML

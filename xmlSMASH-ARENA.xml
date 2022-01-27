@@ -64,7 +64,7 @@
         <iIdClase>1</iIdClase>
         <sNombre>Clase de Padel</sNombre>
         <sDescripcion>Clase de padel</sDescripcion>
-        <dtInicio> 2022-05-28 17:00:00</dtInicio>
+        <dtInicio> 2022-05-28 17:30:00</dtInicio>
         <dtFin>2022-05-28 18:30:00</dtFin>
         <iCapacidad>10</iCapacidad>
         <sTipoActividad>Padel</sTipoActividad>
@@ -75,7 +75,7 @@
         <iIdClase>2</iIdClase>
         <sNombre>Clase de Padel</sNombre>
         <sDescripcion>Clase de padel</sDescripcion>
-        <dtInicio>2022-03-28 21:00:00</dtInicio>
+        <dtInicio>2022-03-28 21:30:00</dtInicio>
         <dtFin>2022-03-28 23:30:00</dtFin>
         <iCapacidad>5</iCapacidad>
         <sTipoActividad>Padel niños</sTipoActividad>

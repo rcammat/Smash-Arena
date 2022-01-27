@@ -5,6 +5,15 @@ class Gestion {
         this.aClases=[];
         this.aPistas= [];
     }
+    get usuarios(){
+        return this.aUsuarios;
+    }
+    get pistas () {
+        return this.aPistas;
+    }
+    get clases() {
+        return this.aClases;
+    }
     altaUsuario(oUsuario){
         if (oGestion.aUsuarios.filter(oUsu => oUsu.DNI == oUsuario.DNI).length == 0){
             oGestion.aUsuarios.push(oUsuario);
@@ -234,6 +243,9 @@ class Clase {
     set Inicio(dtInicio){
         this.dtInicio = dtInicio;
     }
+    get Fin(){
+        return this.dtFin;
+    }
     set Fin(dtFin){
         this.dtFin = dtFin;
     }
@@ -242,6 +254,12 @@ class Clase {
     }
     get Instructor(){
         return this.iIdInstructor;
+    }
+    get Descripcion(){
+        return this.sDescripcion;
+    }
+    get Actividad(){
+        return this.sTipoActividad;
     }
 }
 
