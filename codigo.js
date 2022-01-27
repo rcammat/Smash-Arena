@@ -14,7 +14,7 @@ frmAltaReserva.botonEnviar.addEventListener("click",hacerReserva,false);
 frmAltaPista.botonEnviar.addEventListener("click",altaPista,false);
 frmApuntarClase.botonEnviar.addEventListener("click",apuntarseClase,false);
 frmListados.botonEnviar.addEventListener("click",manejadorListado,false);
-frmListados.botonEnviar.addEventListener("change",mostrarFiltros,false);
+document.getElementById("comboListados").addEventListener("change",mostrarFiltros,false);
 
 
 //Creamos el objeto gestion y despues cargamos el documento XML
@@ -344,7 +344,6 @@ function cargarComboClases(){
 }
 
 //Manejador de Listados
-
 function manejadorListado(){
     let oCombo = document.querySelector("#comboListados");
     let oOption = oCombo.children[oCombo.selectedIndex];
@@ -426,7 +425,6 @@ function listadoUsuarios(){
 }
 
 //listadoPistas
-
 function listadoPistas(){
     let oTabla = document.createElement("table");
     let oCapa = document.querySelector(".formularios");
@@ -541,7 +539,26 @@ function listadoClase(){
 
 //mostrarFiltros
 function mostrarFiltros(){
-
+    let oInput1 = document.getElementById("fechaInicioListado");
+    let oLabel1 = document.getElementById("lblFechaInicio");
+    if(oInput1==null){
+        oInput1= document.createElement("input");
+        oLabel1= document.createElement("label");
+    }
+    switch(document.getElementById('comboListados').value){
+        case "reservas":
+            oInput1.setAttribute("type","date");
+            oInput1.setAttribute("id","fechaInicioListado");
+            oInput1.classList.add("form-control");
+            frmListados.insertBefore(oInput1,frmListados.botonEnviar);
+            oLabel1.setAttribute("id","lblFechaInicio");
+            oLabel1.textContent = "Fecha Inicio";
+            frmListados.insertBefore(oLabel1,oInput1);
+            break;
+        default:
+            oInput1.remove();
+            break;
+    }
 }
 
 //Funcion para cargar los XML
