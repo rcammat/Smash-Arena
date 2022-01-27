@@ -45,19 +45,19 @@
     <reserva>
         <nombre>Reserva 1</nombre>
         <descripcion>Reservar la pista 1</descripcion>
-        <fechaReserva>17:00</fechaReserva>
-        <fechaFin>18:30</fechaFin>
+        <fechaReserva>2022-03-28 17:00</fechaReserva>
+        <fechaFin>2022-03-28 18:00</fechaFin>
         <idPista>1</idPista>
-        <usuarioReserva>Joaquín</usuarioReserva>
+        <usuarioReserva>39018269F</usuarioReserva>
     </reserva>
 
     <reserva>
         <nombre>Reserva 2</nombre>
         <descripcion>Reservar la pista 2</descripcion>
-        <fechaReserva>21:00</fechaReserva>
-        <fechaFin>23:30</fechaFin>
+        <fechaReserva>2022-03-28 21:00</fechaReserva>
+        <fechaFin>2022-03-28 22:00</fechaFin>
         <idPista>2</idPista>
-        <usuarioReserva>Lucas</usuarioReserva>
+        <usuarioReserva>59018269G</usuarioReserva>
     </reserva>
 
     <clase>

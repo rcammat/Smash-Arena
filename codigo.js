@@ -26,6 +26,7 @@ var oXML = loadXMLDoc("xmlSMASH-ARENA.xml");
 cargarUsuarios();
 cargarPistas();
 cargarClases();
+cargarReservas();
 cargarComboPistas();
 cargarComboUsuarios();
 cargarComboClases();
@@ -343,6 +344,22 @@ function cargarComboClases(){
     }
 }
 
+//Cargar reservas desde el XML
+function cargarReservas(){
+    let oReservas = oXML.querySelectorAll("reserva");
+    for(oRes of oReservas){
+        let sNombreReserva = oRes.querySelector("nombre").textContent;
+        let sDescripcion = oRes.querySelector("descripcion").textContent;
+        let dtFechaReserva = new Date(oRes.querySelector("fechaReserva").textContent);
+        let dtFechaFin = new Date(oRes.querySelector("fechaFin").textContent);
+        let iIDPista = oRes.querySelector("idPista").textContent;
+        let sDNIReserva = oRes.querySelector("usuarioReserva").textContent;
+
+        oGestion.altaReserva(new Reserva(sNombreReserva, sDescripcion, dtFechaReserva, dtFechaFin, iIDPista, sDNIReserva));
+
+    }
+}
+
 //Manejador de Listados
 function manejadorListado(){
     let oCombo = document.querySelector("#comboListados");
@@ -540,10 +557,14 @@ function listadoClase(){
 //mostrarFiltros
 function mostrarFiltros(){
     let oInput1 = document.getElementById("fechaInicioListado");
-    let oLabel1 = document.getElementById("lblFechaInicio");
+    let oSpan1 = document.getElementById("lblFechaInicio");
+    let oInput2 = document.getElementById("fechaFinListado");
+    let oSpan2 = document.getElementById("lblFinInicio");
     if(oInput1==null){
         oInput1= document.createElement("input");
-        oLabel1= document.createElement("label");
+        oSpan1= document.createElement("Span");
+        oInput2= document.createElement("input");
+        oSpan2= document.createElement("Span");
     }
     switch(document.getElementById('comboListados').value){
         case "reservas":
@@ -551,12 +572,25 @@ function mostrarFiltros(){
             oInput1.setAttribute("id","fechaInicioListado");
             oInput1.classList.add("form-control");
             frmListados.insertBefore(oInput1,frmListados.botonEnviar);
-            oLabel1.setAttribute("id","lblFechaInicio");
-            oLabel1.textContent = "Fecha Inicio";
-            frmListados.insertBefore(oLabel1,oInput1);
+            oSpan1.setAttribute("id","lblFechaInicio");
+            oSpan1.textContent = "Fecha Inicio";
+            oSpan1.classList.add("input-group-text");
+            frmListados.insertBefore(oSpan1,oInput1);
+
+            oInput2.setAttribute("type","date");
+            oInput2.setAttribute("id","fechaFinListado");
+            oInput2.classList.add("form-control");
+            frmListados.insertBefore(oInput2,frmListados.botonEnviar);
+            oSpan2.setAttribute("id","lblFinInicio");
+            oSpan2.textContent = "Fecha Fin";
+            oSpan2.classList.add("input-group-text");
+            frmListados.insertBefore(oSpan2,oInput2);
             break;
         default:
             oInput1.remove();
+            oSpan1.remove();
+            oInput2.remove();
+            oSpan2.remove();
             break;
     }
 }
