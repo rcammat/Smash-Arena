@@ -53,7 +53,7 @@ function altaUsuario() {
         bInstructor=false;
     }
 
-    let oExpReg = /^[\sa-zA-Z]{10,40}$/; 
+    let oExpReg = /^[\sa-zA-Z]{3,40}$/; 
     if(!validaFormularios(sNombreUsuario,oExpReg))
     {
         bValido=false;
@@ -135,7 +135,7 @@ function modificarUsuario() {
         bValido=false;
     }
 
-    let oExpReg = /^[\sa-zA-Z]{10,40}$/; 
+    let oExpReg = /^[\sa-zA-Z]{3,40}$/; 
     if(!validaFormularios(sNombreUsuario,oExpReg))
     {
         bValido=false;
@@ -252,7 +252,7 @@ function hacerReserva()
         frmAltaReserva.idReserva.classList.remove("error");
 
 
-     oExpReg = /^[\s\w]{10,40}$/; 
+     oExpReg = /^[\s\w]{4,40}$/; 
     if(!validaFormularios(nomReserva,oExpReg))
     {
         if(bValido)
@@ -378,7 +378,7 @@ function altaClase(){
 
 
 
-    oExpReg = /^[\w\s]{10,40}$/; 
+    oExpReg = /^[\w\s]{4,40}$/; 
     if(!validaFormularios(sNombreClase,oExpReg))
     {
         if(bValido)
@@ -393,7 +393,7 @@ function altaClase(){
 
 
 
-    oExpReg = /^[\w\s]{10,40}$/;
+    oExpReg = /^[\w\s]{4,40}$/;
         if(!validaFormularios(sDescripcionClase,oExpReg))
     {
         if(bValido)
@@ -436,7 +436,7 @@ function altaClase(){
 
 
 
-    oExpReg = /^[\w\s]{10,40}$/;
+    oExpReg = /^[\w\s]{4,40}$/;
         if(!validaFormularios(sTipoClase,oExpReg))
     {
         if(bValido)
@@ -494,7 +494,7 @@ function altaPista(){
     let bValido=true;
 
 
-    let oExpReg = /^[\s\w]{10,40}$/;  
+    let oExpReg = /^[\s\w]{4,40}$/;  
     if(!validaFormularios(sNombrePista,oExpReg))
     {
         bValido=false;
