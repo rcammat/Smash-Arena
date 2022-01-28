@@ -97,13 +97,7 @@ class Gestion {
             return "Ya exise una clase con ese ID";
         }
     }
-    modificarClase(iID,dtInicio,dtFin){
-        let aClase = oGestion.aClases.filter(aCla => aCla.ID == iID);
-        aClase[0].Inicio = dtInicio;
-        aClase[0].Fin = dtFin;
-        return oGestion.aClases
-    }
-
+   
     apuntarseClase(sDNI,iIDClase){
         let oUsuario = oGestion.buscarUsuario(sDNI);
         let oClase = oGestion.aClases.filter(oClase => oClase.ID == iIDClase)[0];
