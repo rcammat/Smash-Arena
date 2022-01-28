@@ -158,6 +158,12 @@ class Reserva{
       this.iIdPista = iIdPista;
       this.sUsuarioReserva = sUsuarioReserva;
     }
+    get Nombre(){
+        return this.sNombreReserva;
+    }
+    get Descripcion(){
+        return this.sDescripcion
+    }
     get pista(){
         return this.iIdPista;
     }

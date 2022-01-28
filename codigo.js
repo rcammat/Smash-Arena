@@ -379,11 +379,19 @@ function manejadorListado(){
         case "clases":
             ocultarTodosFormularios();
             listadoClase();
+            break;
+        case "reservas":
+            ocultarTodosFormularios();
+            listadoReserva();
+            break;
+        case "buscarUsuarioPorDNI":
+            ocultarTodosFormularios();
+            listadoBuscarUsuario();
+            break;            
     }
 }
 
 //Listado de usuarios
-
 function listadoUsuarios(){
     let oTabla = document.createElement("table");
     let oCapa = document.querySelector(".formularios");
@@ -437,7 +445,7 @@ function listadoUsuarios(){
 
     }
     oCapa.appendChild(oTabla);
-    
+    frmListados.reset();
   
 }
 
@@ -473,6 +481,7 @@ function listadoPistas(){
         celdaCuerpo.textContent = oPis.nombre;
     }
     oCapa.appendChild(oTabla);
+    frmListados.reset();
 }
 
 //listadoClase
@@ -552,6 +561,164 @@ function listadoClase(){
     }
 
     oCapa.appendChild(oTabla);
+    frmListados.reset();
+}
+//Listado de reserva entre dos fecha
+function listadoReserva(){
+    let dtFechaInicio = document.querySelector("#fechaInicioListado").value;
+    let dtFechaFin = document.querySelector("#fechaFinListado").value
+    let oTabla = document.createElement("table");
+    let oCapa = document.querySelector(".formularios");
+    let oTH = document.createElement("th");
+    let oReservas = [];
+    for(oPis of oGestion.pistas){
+        for(oRes of oPis.reservas){
+            oReservas.push(oRes);
+        }
+    }
+
+    oTabla.classList.add("table");
+  
+
+    let cabecera = oTabla.createTHead();
+
+
+    let filaCabecera = cabecera.insertRow(-1);
+    let celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Nombre";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Descripcion";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Fecha Inicio";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Fecha Fin";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "ID Pista";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "DNI Usuario";
+
+    let cuerpo = oTabla.createTBody();
+    if(dtFechaInicio=="" || dtFechaFin == ""){
+        for(oRes of oReservas){
+            let filaCuerpo = cuerpo.insertRow(-1);
+            let celdaCuerpo = filaCuerpo.insertCell(-1);
+            celdaCuerpo.textContent = oRes.Nombre;
+    
+            celdaCuerpo = filaCuerpo.insertCell(-1);
+            celdaCuerpo.textContent = oRes.Descripcion;
+    
+            celdaCuerpo = filaCuerpo.insertCell(-1);
+            celdaCuerpo.textContent = oRes.fechaIni.toLocaleDateString("es-ES")+" "+ oRes.fechaIni.getUTCHours()+":"+oRes.fechaIni.getMinutes()+"H";
+    
+            celdaCuerpo = filaCuerpo.insertCell(-1);
+            celdaCuerpo.textContent = oRes.fechaFin.toLocaleDateString("es-ES")+" "+ oRes.fechaFin.getUTCHours()+":"+oRes.fechaFin.getMinutes()+"H";
+    
+            celdaCuerpo = filaCuerpo.insertCell(-1);
+            celdaCuerpo.textContent = oRes.pista;
+
+            celdaCuerpo = filaCuerpo.insertCell(-1);
+            celdaCuerpo.textContent = oRes.dniReserva;
+        }
+    }else {
+        dtFechaInicio = new Date(dtFechaInicio);
+        dtFechaFin = new Date(dtFechaFin);
+
+        for(oRes of oReservas){
+            if(oRes.fechaIni>=dtFechaInicio && oRes.fechaFin <= dtFechaFin){
+                let filaCuerpo = cuerpo.insertRow(-1);
+                let celdaCuerpo = filaCuerpo.insertCell(-1);
+                celdaCuerpo.textContent = oRes.Nombre;
+        
+                celdaCuerpo = filaCuerpo.insertCell(-1);
+                celdaCuerpo.textContent = oRes.Descripcion;
+        
+                celdaCuerpo = filaCuerpo.insertCell(-1);
+                celdaCuerpo.textContent = oRes.fechaIni.toLocaleDateString("es-ES")+" "+ oRes.fechaIni.getUTCHours()+":"+oRes.fechaIni.getMinutes()+"H";
+        
+                celdaCuerpo = filaCuerpo.insertCell(-1);
+                celdaCuerpo.textContent = oRes.fechaFin.toLocaleDateString("es-ES")+" "+ oRes.fechaFin.getUTCHours()+":"+oRes.fechaFin.getMinutes()+"H";
+        
+                celdaCuerpo = filaCuerpo.insertCell(-1);
+                celdaCuerpo.textContent = oRes.pista;
+    
+                celdaCuerpo = filaCuerpo.insertCell(-1);
+                celdaCuerpo.textContent = oRes.dniReserva;
+            }   
+        }
+    }
+
+
+    oCapa.appendChild(oTabla);
+    frmListados.reset();
+    mostrarFiltros()
+
+}
+//listado de un usuario buscado por un DNI 
+function listadoBuscarUsuario(){
+    let sDNI  = document.querySelector("#iDNIBuscar").value;
+    let oTabla = document.createElement("table");
+    let oCapa = document.querySelector(".formularios");
+    let oTH = document.createElement("th");
+    let oUsu = oGestion.buscarUsuario(sDNI);
+    if(oUsu == null){
+        alert("Debes introducir un DNI correcto");
+    }else {
+    oTabla.classList.add("table");
+  
+
+    let cabecera = oTabla.createTHead();
+
+
+    let filaCabecera = cabecera.insertRow(-1);
+    let celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "DNI";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Nombre Completo";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Edad";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Sexo";
+
+    oTH = document.createElement("th");
+    celdaCabecera = filaCabecera.appendChild(oTH);
+    celdaCabecera.textContent = "Es Instructor";
+
+    let cuerpo = oTabla.createTBody();
+    let filaCuerpo = cuerpo.insertRow(-1);
+    let celdaCuerpo = filaCuerpo.insertCell(-1);
+    celdaCuerpo.textContent = oUsu.DNI;
+
+    celdaCuerpo = filaCuerpo.insertCell(-1);
+    celdaCuerpo.textContent = oUsu.NombreAp;
+
+    celdaCuerpo = filaCuerpo.insertCell(-1);
+    celdaCuerpo.textContent = oUsu.Edad;
+
+    celdaCuerpo = filaCuerpo.insertCell(-1);
+    celdaCuerpo.textContent = oUsu.Sexo?"Masculino":"Femenino";
+
+    celdaCuerpo = filaCuerpo.insertCell(-1);
+    celdaCuerpo.textContent = oUsu.EsInstructor?"Si":"No";
+    oCapa.appendChild(oTabla);
+    }
+    frmListados.reset();
+    mostrarFiltros();
 }
 
 //mostrarFiltros
@@ -560,14 +727,22 @@ function mostrarFiltros(){
     let oSpan1 = document.getElementById("lblFechaInicio");
     let oInput2 = document.getElementById("fechaFinListado");
     let oSpan2 = document.getElementById("lblFinInicio");
+    let oSpanDNI = document.getElementById("lblDNIBuscar");
+    let oInputDNI = document.getElementById("iDNIBuscar")
     if(oInput1==null){
         oInput1= document.createElement("input");
         oSpan1= document.createElement("Span");
         oInput2= document.createElement("input");
         oSpan2= document.createElement("Span");
     }
+    if (oInputDNI == null) {
+        oInputDNI= document.createElement("input");
+        oSpanDNI= document.createElement("Span");
+    }
     switch(document.getElementById('comboListados').value){
         case "reservas":
+            oInputDNI.remove();
+            oSpanDNI.remove();
             oInput1.setAttribute("type","date");
             oInput1.setAttribute("id","fechaInicioListado");
             oInput1.classList.add("form-control");
@@ -580,17 +755,36 @@ function mostrarFiltros(){
             oInput2.setAttribute("type","date");
             oInput2.setAttribute("id","fechaFinListado");
             oInput2.classList.add("form-control");
+            oInput2.classList.add("mb-4");
             frmListados.insertBefore(oInput2,frmListados.botonEnviar);
             oSpan2.setAttribute("id","lblFinInicio");
             oSpan2.textContent = "Fecha Fin";
             oSpan2.classList.add("input-group-text");
             frmListados.insertBefore(oSpan2,oInput2);
             break;
+        case "buscarUsuarioPorDNI":
+            oInput1.remove();
+            oSpan1.remove();
+            oInput2.remove();
+            oSpan2.remove();
+            oInputDNI.setAttribute("type","text");
+            oInputDNI.setAttribute("id","iDNIBuscar");
+            oInputDNI.classList.add("form-control");
+            oInputDNI.classList.add("mb-4");
+            frmListados.insertBefore(oInputDNI,frmListados.botonEnviar);
+            oSpanDNI.setAttribute("id","lblDNIBuscar");
+            oSpanDNI.textContent = "DNI";
+            oSpanDNI.classList.add("input-group-text");
+            frmListados.insertBefore(oSpanDNI,oInputDNI);
+            break;
+
         default:
             oInput1.remove();
             oSpan1.remove();
             oInput2.remove();
             oSpan2.remove();
+            oInputDNI.remove();
+            oSpanDNI.remove();
             break;
     }
 }
