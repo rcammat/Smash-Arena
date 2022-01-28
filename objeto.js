@@ -183,7 +183,6 @@ class Usuario {
         this.iEdad = iEdad;
         this.bSexo = bSexo;//true hombre, false mujer
         this.bEsInstructor = bEsInstructor;
-        this.aClases = [];
     }
     get NombreAp(){
         return this.sNombreAp;
