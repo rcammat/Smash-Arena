@@ -39,6 +39,9 @@ function altaUsuario() {
     let iEdad = document.querySelector(".Edad").value;     
     let bSexo;
     let bInstructor;
+    let bValido=true;
+
+    let sErrores="";
     if(document.getElementById('radioSexoHombreAltaUsuario').checked){
         bSexo=true;
     }else {
@@ -49,14 +52,58 @@ function altaUsuario() {
     }else {
         bInstructor=false;
     }
-    if(sNombreUsuario == "" || sDNI == "" || iEdad == "" ){
-        alert("Debes rellenar todos los campos");
-    }else {
+
+    let oExpReg = /^[\sa-zA-Z]{10,40}$/; 
+    if(!validaFormularios(sNombreUsuario,oExpReg))
+    {
+        bValido=false;
+        document.querySelector(".nombreUsuario").classList.add("error");
+        sErrores += "El usuario no tiene el formato correcto\n";
+        document.querySelector(".nombreUsuario").focus();
+    }
+    else
+    document.querySelector(".nombreUsuario").classList.remove("error");
+
+
+    oExpReg = /^\d{8}[a-zA-Z]{1}$/; 
+    if(!validaFormularios(sDNI,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".dniUsuario").focus();
+
+        bValido=false;
+        document.querySelector(".dniUsuario").classList.add("error");
+        sErrores += "El DNI no tiene el formato correcto\n";
+    }
+    else
+    sDNI = document.querySelector(".dniUsuario").classList.remove("error");
+
+
+    oExpReg = /^\d{1,3}$/; 
+    if(!validaFormularios(iEdad,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".Edad").focus();
+
+        bValido=false;
+        document.querySelector(".Edad").classList.add("error");
+        sErrores += "La edad no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".Edad").classList.remove("error");
+
+
+
+
+    if(bValido)
+    {
         alert(oGestion.altaUsuario(new Usuario(sNombreUsuario,sDNI,iEdad,bSexo,bInstructor)));
         cargarComboUsuarios();
         frmAltaUsuario.reset();
         ocultarTodosFormularios();
     }
+    else
+    alert(sErrores);
 }
 
 //Modificar Usuario
@@ -68,6 +115,9 @@ function modificarUsuario() {
     let iEdad = document.querySelector(".edadModificar").value;
     let bSexo;
     let bInstructor;
+    let sErrores="";
+    let bValido=true;
+
     if(document.getElementById('radioSexoHombre').checked){
         bSexo=true;
     }else {
@@ -78,14 +128,63 @@ function modificarUsuario() {
     } else {
         bInstructor = false;
     }
-    if(sNombreUsuario == "" || iEdad == "" ){
-        alert("Debes rellenar todos los campos");
-    }else {
+
+    if(document.getElementById("comboUsuarios").selectedIndex == 0)
+    {
+        sErrores += "Debe seleccionar un usuario al que modificar.\n";
+        bValido=false;
+    }
+
+    let oExpReg = /^[\sa-zA-Z]{10,40}$/; 
+    if(!validaFormularios(sNombreUsuario,oExpReg))
+    {
+        bValido=false;
+        document.querySelector(".nombreUsuarioModificar").classList.add("error");
+        sErrores += "El usuario no tiene el formato correcto\n";
+        document.querySelector(".nombreUsuarioModificar").focus();
+    }
+    else
+    document.querySelector(".nombreUsuarioModificar").classList.remove("error");
+
+
+    oExpReg = /^\d{8}[a-zA-Z]{1}$/; 
+    if(!validaFormularios(sDNIAGuardar,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".dniUsuarioModificar").focus();
+
+        bValido=false;
+        document.querySelector(".dniUsuarioModificar").classList.add("error");
+        sErrores += "El DNI no tiene el formato correcto\n";
+    }
+    else
+    sDNI = document.querySelector(".dniUsuarioModificar").classList.remove("error");
+
+
+    oExpReg = /^\d{1,3}$/; 
+    if(!validaFormularios(iEdad,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".edadModificar").focus();
+
+        bValido=false;
+        document.querySelector(".edadModificar").classList.add("error");
+        sErrores += "La edad no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".edadModificar").classList.remove("error");
+    
+
+
+
+if(bValido){
         alert(oGestion.modificarUsuario(sDNIABuscar,sDNIAGuardar,sNombreUsuario,iEdad,bSexo,bInstructor));
         cargarComboUsuarios();
         frmModificarUsuario.reset();
         ocultarTodosFormularios();
-    }
+}
+else
+alert(sErrores);
 }
 
 //Mostrar todos los formularios (Si se añade un formulario se debe añadir el case correspondiente)
@@ -131,27 +230,105 @@ function hacerReserva()
     let idReserva = frmAltaReserva.idReserva.value;
     let nomReserva = frmAltaReserva.nombreReserva.value;
     let descripcionReserva = frmAltaReserva.descripcionReserva.value;
-    //Para hacer la fecha de inicio y de fin con sus horas.
-    let fechaReserva = new Date(frmAltaReserva.diaReserva.value);
-    let StringInicioReserva = frmAltaReserva.horaInicioReserva.value;
-    let arrayHora = StringInicioReserva.split(":");
-    fechaReserva.setHours(arrayHora[0]);
-    fechaReserva.setMinutes(arrayHora[1]);
-    let fechaFin = new Date (fechaReserva);
-    fechaFin.setHours(fechaReserva.getHours()+1); 
-    //Ya tenemos la fecha inicio y fin.
-
+    
+    let sErrores="";
+    let bValido=true;
     //Control de errores antes de crear el objeto.
     let hoy = fechaHoy();
-    console.log(hoy);
+
+
+
+    
+   let oExpReg = /^\d{8}[a-zA-Z]{1}$/; 
+    if(!validaFormularios(idReserva,oExpReg))
+    {
+        bValido=false;
+        frmAltaReserva.idReserva.classList.add("error");
+        sErrores += "El DNI no tiene el formato correcto\n";
+        frmAltaReserva.idReserva.focus();
+
+    }
+    else
+        frmAltaReserva.idReserva.classList.remove("error");
+
+
+     oExpReg = /^[\s\w]{10,40}$/; 
+    if(!validaFormularios(nomReserva,oExpReg))
+    {
+        if(bValido)
+        frmAltaReserva.idReserva.focus();
+        
+        bValido=false;
+        frmAltaReserva.nombreReserva.classList.add("error");
+        sErrores += "El nombre de la reserva no tiene el formato correcto\n";
+    }
+    else
+    frmAltaReserva.nombreReserva.classList.remove("error");
+
+
+    if(!validaFormularios(descripcionReserva,oExpReg))
+    {
+        if(bValido)
+        frmAltaReserva.descripcionReserva.focus();
+        
+        bValido=false;
+        frmAltaReserva.descripcionReserva.classList.add("error");
+        sErrores += "La descripcion de la reserva no tiene el formato correcto\n";
+    }
+    else
+    frmAltaReserva.descripcionReserva.classList.remove("error");
+
+
+  //Para hacer la fecha de inicio y de fin con sus horas.
+  if(frmAltaReserva.diaReserva.value != "")
+  {
+  var fechaReserva = new Date(frmAltaReserva.diaReserva.value);
+  }
+  else
+  {
+  sErrores += "Introduzca una fecha.\n";
+  frmAltaReserva.diaReserva.focus();
+  bValido=false;
+  }
+
+  if(frmAltaReserva.horaInicioReserva.value != "")
+  {
+  var StringInicioReserva = frmAltaReserva.horaInicioReserva.value;
+  let arrayHora = StringInicioReserva.split(":");
+  fechaReserva.setHours(arrayHora[0]);
+  fechaReserva.setMinutes(arrayHora[1]);
+  var fechaFin = new Date (fechaReserva);
+  fechaFin.setHours(fechaReserva.getHours()+1);
+  }
+  else
+  {
+  sErrores += "Introduzca una hora.\n";
+  bValido=false;
+  frmAltaReserva.horaInicioReserva.focus();
+
+  }
+
+   
+  //Ya tenemos la fecha inicio y fin.
+
 
     if(fechaReserva < hoy)
     {
-        alert("Aristoteles 2015 : No puede reservar en el pasado.");
+        sErrores += "La fecha seleccionada es inferior a la actual.\n";
+        bValido = false;
     }
 
-    else{
-        let pistaSelecionada = frmAltaReserva.comboPistas.value;
+    let pistaSelecionada = frmAltaReserva.comboPistas.value;
+    if(frmAltaReserva.comboPistas.selectedIndex == 0)
+    {
+        bValido=false;
+        sErrores += "Debe seleccionar una pista.";
+    
+    }
+
+
+    if(bValido)
+    {
         oReserva = new Reserva(nomReserva,descripcionReserva,fechaReserva,fechaFin,pistaSelecionada,idReserva);
         console.log(oReserva);
 
@@ -159,6 +336,9 @@ function hacerReserva()
         // Todo fue correcto borramos los datos.
         frmAltaReserva.reset(); 
         ocultarTodosFormularios();
+    }
+    else{
+        alert(sErrores);
     }
 
 }
@@ -180,6 +360,115 @@ function altaClase(){
     let sTipoClase = document.querySelector('.tipoClase').value;     
     let idInstructor = document.querySelector('.idInstructorClase').value;
     let dtHoy = fechaHoy();
+    let sErrores="";
+    let bValido=true;
+
+
+
+    let oExpReg = /^\d{1,3}$/; 
+    if(!validaFormularios(iIdClase,oExpReg))
+    {
+        document.querySelector(".idClase").focus();
+        bValido=false;
+        document.querySelector(".idClase").classList.add("error");
+        sErrores += "El id de la clase no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".idClase").classList.remove("error");
+
+
+
+    oExpReg = /^[\w\s]{10,40}$/; 
+    if(!validaFormularios(sNombreClase,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".nombreClase").focus();
+
+        bValido=false;
+        document.querySelector(".nombreClase").classList.add("error");
+        sErrores += "El nombre de la clase no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".nombreClase").classList.remove("error");
+
+
+
+    oExpReg = /^[\w\s]{10,40}$/;
+        if(!validaFormularios(sDescripcionClase,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".descripcionClase").focus();
+        bValido=false;
+        document.querySelector(".descripcionClase").classList.add("error");
+        sErrores += "La descripcion de la clase no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".descripcionClase").classList.remove("error");
+
+
+    //Fechas y horas.
+    if(document.querySelector('.diaInicioClase').value == "" || document.querySelector('.diaFinClase').value=="")
+    {
+        bValido=false;
+        sErrores+="Las fechas estan incompletas.\n";
+    }
+
+    if(document.querySelector(".horaInicioClase").value == "" || document.querySelector(".horaFinClase").value == "")
+    {
+        bValido=false;
+        sErrores+="Las horas estan incompletas.\n";
+    }
+
+    //
+    oExpReg = /^\d{1,2}$/;
+        if(!validaFormularios(iCapacidad,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".capacidadClase").focus();
+        bValido=false;
+        document.querySelector(".capacidadClase").classList.add("error");
+        sErrores += "La capacidad de la clase no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".capacidadClase").classList.remove("error");
+
+
+
+
+
+    oExpReg = /^[\w\s]{10,40}$/;
+        if(!validaFormularios(sTipoClase,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".tipoClase").focus();
+        bValido=false;
+        document.querySelector(".tipoClase").classList.add("error");
+        sErrores += "El tipo de clase no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".tipoClase").classList.remove("error");
+
+
+
+
+    oExpReg = /^\d{8}[a-zA-Z]{1}$/; 
+    if(!validaFormularios(idInstructor,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".idInstructorClase").focus();
+        bValido=false;
+        document.querySelector(".idInstructorClase").classList.add("error");
+        sErrores += "El id del instructor no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".idInstructorClase").classList.remove("error");
+
+
+
+
+
+if(bValido){
+
     if(dtDiaFin < dtHoy || dtDiaInicio < dtHoy){
         alert("Las fechas introducidas son menores al dia y hora actual");
     }else {
@@ -187,18 +476,63 @@ function altaClase(){
             alert(oGestion.altaClase(new Clase(iIdClase,sNombreClase,sDescripcionClase,dtDiaInicio,dtDiaFin,iCapacidad,sTipoClase,idInstructor)));
             cargarComboClases();
             frmAltaClases.reset();
+            ocultarTodosFormularios();
         }else {
             alert("La fecha de inicio es mayor a la fecha de fin");
         }
     }
 }
+else{
+    alert(sErrores);
+}
+}
 //Alta Pista
 function altaPista(){
     let sNombrePista = document.querySelector(".nombrePista").value;
     let iIDPista = document.querySelector(".numeroPista").value;
+    let sErrores="";
+    let bValido=true;
 
-    alert(oGestion.altaPista(new Pista(sNombrePista,iIDPista)));
-    cargarComboPistas();
+
+    let oExpReg = /^[\s\w]{10,40}$/;  
+    if(!validaFormularios(sNombrePista,oExpReg))
+    {
+        bValido=false;
+        document.querySelector(".nombrePista").classList.add("error");
+        sErrores += "El DNI no tiene el formato correcto\n";
+        document.querySelector(".nombrePista").focus();
+
+    }
+    else
+    document.querySelector(".nombrePista").classList.remove("error");
+
+
+     oExpReg = /^[\d]{1,4}$/; 
+    if(!validaFormularios(iIDPista,oExpReg))
+    {
+        if(bValido)
+        document.querySelector(".numeroPista").focus();
+        
+        bValido=false;
+        document.querySelector(".numeroPista").classList.add("error");
+        sErrores += "El nombre de la reserva no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".numeroPista").classList.remove("error");
+
+
+    if(bValido)
+    {
+        alert(oGestion.altaPista(new Pista(sNombrePista,iIDPista)));
+        cargarComboPistas();
+
+        frmAltaPista.reset(); 
+        ocultarTodosFormularios();
+    }
+    else{
+        alert(sErrores);
+    }
+
 }
 
 //Apuntarse Clase
@@ -206,8 +540,33 @@ function apuntarseClase() {
     let sDNI = document.querySelector(".dniUsuarioApuntarseClase").value;
     let indexCombo = document.querySelector("#comboClasesApuntarseClase").selectedIndex;
     let iIDClase = document.querySelector("#comboClasesApuntarseClase")[indexCombo].value;
-    
+    let bValido = true;
+    let sErrores="";
+
+   let  oExpReg = /^\d{8}[a-zA-Z]{1}$/; 
+    if(!validaFormularios(sDNI,oExpReg))
+    {
+        document.querySelector(".dniUsuarioApuntarseClase").focus();
+        bValido=false;
+        document.querySelector(".dniUsuarioApuntarseClase").classList.add("error");
+        sErrores += "El DNI no tiene el formato correcto\n";
+    }
+    else
+    document.querySelector(".dniUsuarioApuntarseClase").classList.remove("error");
+
+
+    if(document.querySelector("#comboClasesApuntarseClase").selectedIndex == 0)
+    {
+        sErrores+= "Debe seleccionar una clase.";
+        bValido = false;
+    }
+
+    if(bValido)
+    {
     alert(oGestion.apuntarseClase(sDNI,iIDClase));
+    }
+    else
+    alert(sErrores); //Avisar al profe de que mire su funcion de apuntarse a clase.
 }
 
 //Cargar pistas desde XML
@@ -302,7 +661,7 @@ function cargarComboPistas() {
     }
     oCapa.appendChild(document.createElement("OPTION"))
     oCapa.lastChild.value = "nulo";
-    oCapa.lastChild.textContent = "Selecciona una clase..."
+    oCapa.lastChild.textContent = "Selecciona una pista..."
     for (oPista of oGestion.aPistas){
         oCapa.appendChild(document.createElement("OPTION"));
         oCapa.lastChild.value = oPista.id;
@@ -809,3 +1168,13 @@ function loadXMLDoc(filename)
 
 
 function fechaHoy(){return new Date(Date.now())};
+
+function validaFormularios(campoAValidar , expresionComprobar){
+    
+    if(!expresionComprobar.test(campoAValidar)){
+        return false;
+       
+    } else{
+        return true;
+    }
+}

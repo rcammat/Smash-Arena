@@ -111,3 +111,7 @@ legend {
     padding: 1.5em;
     background-color: #F2F2F2;
 }
+
+.error{
+    background-color: yellow;
+}

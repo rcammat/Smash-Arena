@@ -62,7 +62,6 @@ class Gestion {
         else
     {   
 
-        //Se puede comprobar que el usuario no este ese dia a la misma hora en otra pista.
         for(let reserva of pista.reservas)
         {
             if(oReserva.dFechaReserva > reserva.dFechaReserva && oReserva.dFechaReserva < reserva.dFechaFin)
